@@ -89,7 +89,6 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
                     gameVictoryScreen.Show(); /* MUESTRA PANTALLA VICTORIA  (lINEA 54/GameEngine)  */
                     break; // Salir del bucle de juego
                 }
-
                 InputManager.Update();
 
                 if (!gameInicio.IsActive && !playerLost && !playerWin)

@@ -9,10 +9,10 @@ namespace CanvasDrawing.Game
     {
         public static void InitializeGame(Form form)
         {
-            Image madera = Properties.Resources.Madera;
+            Image piso = Properties.Resources.Piso;
             Image muro = Properties.Resources.Muro;
             Image portalwin = Properties.Resources.Portal;
-            Image jugador = Properties.Resources.MainChar;
+            Image jugador = Properties.Resources._1_south1;
             Image NPC = Properties.Resources.Ghost;
 
             Random random = new Random();
@@ -32,7 +32,7 @@ namespace CanvasDrawing.Game
                     }
                     else
                     {
-                        new BackgroundElement(madera, new Vector2(50, 50), i * 49 + 25, j * 49 + 25);
+                        new BackgroundElement(piso, new Vector2(50, 50), i * 49 + 25, j * 49 + 25);
                         int aux = random.Next(0, 2);
                     }
                 }

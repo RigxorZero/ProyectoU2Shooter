@@ -15,7 +15,7 @@ namespace CanvasDrawing.Game
         {
             base.OnCollisionEnter(other);
             Frame f = other as Frame;
-            //f?.GoBack();
+            f?.GoBack();
         }
     }
 }

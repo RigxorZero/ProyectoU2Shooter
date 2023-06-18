@@ -131,7 +131,10 @@
     <value>..\Resources\MainChar.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Muro" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Muro.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\Muro.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Piso" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Piso.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Portal" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Portal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -141,5 +144,53 @@
   </data>
   <data name="_1298880" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1298880.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1_left1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MainCharacter\1_left1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1_left2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MainCharacter\1_left2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1_left3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MainCharacter\1_left3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1_left4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MainCharacter\1_left4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1_north1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MainCharacter\1_north1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1_north2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MainCharacter\1_north2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1_north3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MainCharacter\1_north3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1_north4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MainCharacter\1_north4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1_side1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MainCharacter\1_side1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1_side2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MainCharacter\1_side2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1_side3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MainCharacter\1_side3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1_side4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MainCharacter\1_side4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1_south1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MainCharacter\1_south1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1_south2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MainCharacter\1_south2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1_south3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MainCharacter\1_south3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1_south4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MainCharacter\1_south4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

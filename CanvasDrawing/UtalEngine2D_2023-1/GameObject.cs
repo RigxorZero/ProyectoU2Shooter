@@ -1,4 +1,5 @@
 ﻿
+using CanvasDrawing.Game;
 using CanvasDrawing.UtalEngine2D_2023_1.Physics;
 using System;
 using System.Drawing;
@@ -77,10 +78,12 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
         {
             int xOffset = 0;
             int yOffset = 0;
-            if(renderer == null)
+
+            if (renderer == null)
             {
                 return;
             }
+            
             graphics.DrawImage(renderer.sprite,
                 (transform.position.x - camera.Position.x - renderer.size.x / 2) * camera.scale + xOffset,
                 (transform.position.y - camera.Position.y - renderer.size.y / 2) * camera.scale + yOffset,
