@@ -22,3 +22,5 @@ Antonia Donoso y Hector Villalobos
     - [ ] 1 tipo de personaje que se mueve 2 segundos hacia el jugador y luego 1.5 segundos se aleja del jugador y que dispara hacia la posición que tendría el jugador en 0.5 segundos si siguiera moviéndose derecho.
 - [ ] El juego debe tener pantalla de inicio y fin. Pantalla de inicio debe tener los nombres de los creadores. Todas las pantallas deben armarse usando el motor de videojuego, no pueden crear nuevos forms, ni usar mensajes.
 - [ ] El jugador debe tener al menos 3 puntos de vida, los enemigos pueden tener vida o morir de un golpe.
+- [ ] Los enemigos se activan cuando el jugador está a 1.5 cámaras de distancia.
+- [ ] Debe ralentizar el tiempo cuando mata a un enemigo 2 segundos.
