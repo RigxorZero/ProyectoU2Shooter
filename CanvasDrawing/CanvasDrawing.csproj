@@ -68,6 +68,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="UtalEngine2D_2023-1\Animation.cs" />
     <Compile Include="UtalEngine2D_2023-1\Camera.cs" />
     <Compile Include="UtalEngine2D_2023-1\EmptyUpdatable.cs" />
     <Compile Include="UtalEngine2D_2023-1\GameEngine.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="UtalEngine2D_2023-1\Physics\PhysicsEngine.cs" />
     <Compile Include="UtalEngine2D_2023-1\Physics\RectCollider.cs" />
     <Compile Include="UtalEngine2D_2023-1\Physics\Rigidbody.cs" />
+    <Compile Include="UtalEngine2D_2023-1\SpriteRenderer.cs" />
     <Compile Include="UtalEngine2D_2023-1\Time.cs" />
     <Compile Include="UtalEngine2D_2023-1\Transform.cs" />
     <Compile Include="UtalEngine2D_2023-1\UtalText.cs" />

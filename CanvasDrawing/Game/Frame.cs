@@ -20,7 +20,7 @@ namespace CanvasDrawing.Game
             myId = LASTID++;
             myCamera = new Camera();
             this.Speed = Speed;
-            renderer.size = newSize;
+            spriteRenderer.Size = newSize;
             if (rand == null)
             {
                 rand = new Random();

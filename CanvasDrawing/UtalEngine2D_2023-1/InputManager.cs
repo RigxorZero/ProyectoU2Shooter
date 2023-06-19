@@ -40,6 +40,11 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
             lastFrameKeyEvents.Clear();
         }
 
+        public static bool GetKey(Keys keyCode)
+        {
+            return keysDown.Contains(keyCode) || keysPressed.ContainsKey(keyCode);
+        }
+
         public static bool GetKeyDown(Keys keyCode)
         {
             return keysDown.Contains(keyCode);

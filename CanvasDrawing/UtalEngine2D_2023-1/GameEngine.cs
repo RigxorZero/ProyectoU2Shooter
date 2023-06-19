@@ -73,7 +73,6 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
                 {
                     engineDrawForm.Invalidate();
                 }
-
                 Time.UpdateDeltaTime();
                 GameObjectManager.Update();
                 PhysicsEngine.Update();
@@ -145,20 +144,21 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
 
             Draw(e.Graphics);
         }
-        
-        public static void Draw(Graphics graphics)
+
+        private static void Draw(Graphics graphics)
         {
-            for (int i = 0; i < GameObjectManager.AllGameObjects.Count; i++)
+            foreach (GameObject go in GameObjectManager.AllGameObjects)
             {
-                GameObject go = GameObjectManager.AllGameObjects[i];
+                Vector2 cameraPos = GameEngine.WorldToCameraPos(go.transform.position);
                 go.Draw(graphics, MainCamera);
             }
-            for (int i = 0; i < GameObjectManager.AllText.Count; i++)
+
+            foreach (UtalText utext in GameObjectManager.AllText)
             {
-                UtalText utext = GameObjectManager.AllText[i];
                 utext.DrawString(graphics);
             }
         }
+
     }
 }
 

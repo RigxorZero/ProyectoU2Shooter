@@ -27,12 +27,12 @@ namespace CanvasDrawing.Game
                 {
                     if ((i == 0 || i == 75 || (i == 37 && (j != 10 && j != 11))) || j == 0 || j == 41 || (j == 20 && (i != 18 && i != 17)))
                     {
-                        Wall wall = new Wall(muro, new Vector2(50, 50), i * 49 + 25, j * 49 + 25);
+                        Wall wall = new Wall(muro, new Vector2(50, 50), i * 50 + 25, j * 50 + 25);
                         wall.rigidbody.isStatic = true;
                     }
                     else
                     {
-                        new BackgroundElement(piso, new Vector2(50, 50), i * 49 + 25, j * 49 + 25);
+                        new BackgroundElement(piso, new Vector2(50, 50), i * 50 + 25, j * 50 + 25);
                         int aux = random.Next(0, 2);
                     }
                 }
