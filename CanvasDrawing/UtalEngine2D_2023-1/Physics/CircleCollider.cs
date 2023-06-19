@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 
 namespace CanvasDrawing.UtalEngine2D_2023_1.Physics
 {
@@ -26,6 +27,20 @@ namespace CanvasDrawing.UtalEngine2D_2023_1.Physics
 
             }
             return false;
+        }
+
+        public override void DrawCollider(Graphics graphics, Camera camera)
+        {
+            int xOffset = 0;
+            int yOffset = 0;
+
+            // Calcular la posición y el radio del círculo en las coordenadas de la cámara
+            float circleX = (rigidbody.transform.position.x - camera.Position.x) * camera.scale + xOffset;
+            float circleY = (rigidbody.transform.position.y - camera.Position.y) * camera.scale + yOffset;
+            float circleRadius = radius * camera.scale;
+
+            // Dibujar el círculo en el objeto Graphics
+            graphics.DrawEllipse(Pens.Red, circleX - circleRadius / 2, circleY - circleRadius / 2, circleRadius, circleRadius);
         }
     }
 }

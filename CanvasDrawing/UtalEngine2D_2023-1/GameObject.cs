@@ -83,12 +83,21 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
             {
                 return;
             }
-            
+
             graphics.DrawImage(renderer.sprite,
                 (transform.position.x - camera.Position.x - renderer.size.x / 2) * camera.scale + xOffset,
                 (transform.position.y - camera.Position.y - renderer.size.y / 2) * camera.scale + yOffset,
-                renderer.size.x / camera.scale, 
+                renderer.size.x / camera.scale,
                 renderer.size.y / camera.scale);
+
+            if (rigidbody != null && rigidbody.colliders != null)
+            {
+                foreach (Collider collider in rigidbody.colliders)
+                {
+                    collider.DrawCollider(graphics, camera);
+                }
+            }
         }
+
     }
 }

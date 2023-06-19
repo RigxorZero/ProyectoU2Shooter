@@ -77,14 +77,14 @@ namespace CanvasDrawing.Game
         }
 
 
-        public void Draw(Graphics g)
+        /*public void Draw(Graphics g)
         {
             // Calcula el rectángulo del área de dibujo del sprite
             RectangleF spriteRect = new RectangleF(transform.position.x, transform.position.y, 20, 24);
 
             // Resto del código para dibujar el jugador
             g.DrawImage(sprite, spriteRect);
-        }
+        }*/
 
         public Image GetCurrentAnimationSprite()
         {
