@@ -2,41 +2,74 @@
 
 namespace CanvasDrawing.UtalEngine2D_2023_1.Physics
 {
-    class RectCollider
+    public class RectCollider : Collider
     {
         public float Width { get; set; }
         public float Height { get; set; }
 
-        public RectCollider(float width, float height)
+        public RectCollider(Rigidbody rigidbody, float width, float height) : base(rigidbody)
         {
             Width = width;
             Height = height;
         }
 
-        public bool Intersects(RectCollider other)
+        public override bool CheckCollision(Collider other)
         {
-            // Verificar si hay intersección entre dos colliders rectangulares
+            if (other is CircleCollider circleCollider)
+            {
+                // Verificar la intersección entre un colisionador rectangular y uno circular
+                // Implementa tu lógica de intersección de rectángulo-círculo aquí
+                Vector2 rectPosition = rigidbody.transform.position;
+                Vector2 circlePosition = circleCollider.rigidbody.transform.position;
 
-            // Calcular los bordes de cada collider
-            float thisLeft = -Width / 2;
-            float thisRight = Width / 2;
-            float thisTop = -Height / 2;
-            float thisBottom = Height / 2;
+                float rectHalfWidth = Width / 2;
+                float rectHalfHeight = Height / 2;
+                float circleRadius = circleCollider.radius;
 
-            float otherLeft = -other.Width / 2;
-            float otherRight = other.Width / 2;
-            float otherTop = -other.Height / 2;
-            float otherBottom = other.Height / 2;
+                float deltaX = Math.Abs(circlePosition.x - rectPosition.x);
+                float deltaY = Math.Abs(circlePosition.y - rectPosition.y);
 
-            // Verificar si hay intersección en el eje X
-            bool intersectX = thisLeft <= otherRight && thisRight >= otherLeft;
+                if (deltaX > rectHalfWidth + circleRadius)
+                    return false;
 
-            // Verificar si hay intersección en el eje Y
-            bool intersectY = thisTop <= otherBottom && thisBottom >= otherTop;
+                if (deltaY > rectHalfHeight + circleRadius)
+                    return false;
 
-            // Hay intersección si hay intersección en ambos ejes
-            return intersectX && intersectY;
+                if (deltaX <= rectHalfWidth || deltaY <= rectHalfHeight)
+                    return true;
+
+                float cornerDeltaX = deltaX - rectHalfWidth;
+                float cornerDeltaY = deltaY - rectHalfHeight;
+                float cornerDistanceSquared = cornerDeltaX * cornerDeltaX + cornerDeltaY * cornerDeltaY;
+
+                return cornerDistanceSquared <= circleRadius * circleRadius;
+            }
+            else if (other is RectCollider rectCollider)
+            {
+                // Verificar la intersección entre dos colisionadores rectangulares
+                // Implementa tu lógica de intersección de rectángulos aquí
+                Vector2 thisPosition = rigidbody.transform.position;
+                Vector2 otherPosition = rectCollider.rigidbody.transform.position;
+
+                float thisHalfWidth = Width / 2;
+                float thisHalfHeight = Height / 2;
+                float otherHalfWidth = rectCollider.Width / 2;
+                float otherHalfHeight = rectCollider.Height / 2;
+
+                float deltaX = Math.Abs(otherPosition.x - thisPosition.x);
+                float deltaY = Math.Abs(otherPosition.y - thisPosition.y);
+
+                float intersectX = thisHalfWidth + otherHalfWidth - deltaX;
+                float intersectY = thisHalfHeight + otherHalfHeight - deltaY;
+
+                return intersectX > 0 && intersectY > 0;
+            }
+            else
+            {
+                throw new ArgumentException("Tipo de colisionador no compatible.");
+            }
         }
     }
 }
+
 

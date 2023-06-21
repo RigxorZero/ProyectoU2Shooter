@@ -10,6 +10,8 @@ namespace CanvasDrawing.Game
         public float timeToDie = 5f;
         public float Rotation { get; set; }
         public GameObject Shooter { get; set; }
+        public bool isDead { get; private set; } = false;
+
         public Bullet(Vector2 dir, float speed, Image newSprite, Vector2 newSize, float xPos, float yPos) : base(newSprite, newSize, xPos, yPos)
         {
             this.Direction = dir;
@@ -26,19 +28,34 @@ namespace CanvasDrawing.Game
             spriteRenderer.Draw(graphics, camera, xOffset, yOffset, rotation);
         }
 
+
+
         public override void Update()
         {
             base.Update();
             transform.position += Direction * Speed * Time.deltaTime;
+
+
 
             if (timeToDie > 0)
             {
                 timeToDie -= Time.deltaTime;
                 if (timeToDie <= 0)
                 {
-                    Dead();
+                    GameEngine.Destroy(this);
                 }
             }
         }
+
+        public override void OnCollisionEnter(GameObject other)
+        {
+            // Comprobar si la bala colisiona con un muro
+            if (other is Wall)
+            {
+                GameEngine.Destroy(this);
+            }
+        }
+
+
     }
 }

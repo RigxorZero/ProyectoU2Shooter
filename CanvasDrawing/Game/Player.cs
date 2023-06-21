@@ -11,6 +11,7 @@ namespace CanvasDrawing.Game
         private Dictionary<string, Animation> animations;
         private KeyValuePair <string, Animation> currentAnimation;
         public Image sprite;
+        private Gun gun;
 
         public Player(float speed, Image newSprite, Vector2 newSize, float x = 0, float y = 0) : base(speed, newSprite, newSize, x, y)
         {
@@ -50,7 +51,7 @@ namespace CanvasDrawing.Game
             Animation rightAnimation = new Animation(rightFrames, 0.25f);
             animations.Add("Right", rightAnimation);
 
-            new Gun(Properties.Resources.cannon_up, Properties.Resources.cannon_down, Properties.Resources.cannon_left, Properties.Resources.cannon_right, this);
+            gun = new Gun(Properties.Resources.cannon_up, Properties.Resources.cannon_down, Properties.Resources.cannon_left, Properties.Resources.cannon_right, this);
 
             // Establecer la animación inicial
             SetAnimation("Down");
@@ -75,31 +76,31 @@ namespace CanvasDrawing.Game
             Vector2 auxLastPos = transform.position;
             bool moved = false;
             float moveSpeed = Speed * 100; // Velocidad de movimiento del jugador
-
+            gun.Update(currentAnimation.Key);
 
             // Comprueba qué teclas están siendo presionadas y mueve al jugador en consecuencia
             if (InputManager.GetKeyUp(Keys.Up))
             {
                 SetAnimation("Up");
-                Bullet bup = new Bullet(new Vector2(0, -1), 400f, Properties.Resources.bulletb, new Vector2(10, 8), transform.position.x, transform.position.y);
+                Bullet bup = new Bullet(new Vector2(0, -1), 400f, Properties.Resources.bulletb, new Vector2(10, 8), transform.position.x, transform.position.y - 7);
                 bup.Rotation = -90f;
             }
             if (InputManager.GetKeyUp(Keys.Down))
             {
                 SetAnimation("Down");
-                Bullet bup = new Bullet(new Vector2(0, 1), 400f, Properties.Resources.bulletb, new Vector2(10, 8), transform.position.x, transform.position.y);
+                Bullet bup = new Bullet(new Vector2(0, 1), 400f, Properties.Resources.bulletb, new Vector2(10, 8), transform.position.x, transform.position.y + 7);
                 bup.Rotation = 90f;
             }
             if (InputManager.GetKeyUp(Keys.Left))
             {
                 SetAnimation("Left");
-                Bullet bup = new Bullet(new Vector2(-1, 0), 400f, Properties.Resources.bulletb, new Vector2(10, 8), transform.position.x, transform.position.y);
+                Bullet bup = new Bullet(new Vector2(-1, 0), 400f, Properties.Resources.bulletb, new Vector2(10, 8), transform.position.x - 7, transform.position.y);
                 bup.Rotation = -180f;
             }
             if (InputManager.GetKeyUp(Keys.Right))
             {
                 SetAnimation("Right");
-                Bullet bup = new Bullet(new Vector2(1, 0), 400f, Properties.Resources.bulletb, new Vector2(10, 8), transform.position.x, transform.position.y);
+                Bullet bup = new Bullet(new Vector2(1, 0), 400f, Properties.Resources.bulletb, new Vector2(10, 8), transform.position.x + 7, transform.position.y);
                 bup.Rotation = 0f;
             }
             if (InputManager.GetKey(Keys.W))
@@ -145,7 +146,18 @@ namespace CanvasDrawing.Game
                 currentAnimation.Value.Update();
             }
 
+
+            
             spriteRenderer.Sprite = currentAnimation.Value.CurrentFrame;
+        }
+
+        public override void Draw(Graphics graphics, Camera camera)
+        {
+            // Dibujar el sprite del jugador
+            base.Draw(graphics, camera);
+
+            // Dibujar el objeto Gun
+            gun.Draw(graphics, this.myCamera);
         }
     }
 }

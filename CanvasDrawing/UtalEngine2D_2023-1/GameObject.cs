@@ -2,6 +2,7 @@
 using CanvasDrawing.UtalEngine2D_2023_1;
 using System.Drawing;
 using System;
+using CanvasDrawing.Game;
 
 public class GameObject
 {
@@ -27,7 +28,16 @@ public class GameObject
         {
             rigidbody = new Rigidbody();
             rigidbody.SetTransform(transform);
-            rigidbody.CreateCircleCollider(newSize.x / 2);
+
+            if (this is Wall)
+            {
+                rigidbody.CreateRectCollider(newSize.x, newSize.y);
+            }
+            else
+            {
+                rigidbody.CreateCircleCollider(newSize.x / 2);
+            }
+
             rigidbody.OnCollision = OnCollisionEnter;
             rigidbody.GetOnCollisionObject = GetOnCollision;
         }
@@ -36,6 +46,7 @@ public class GameObject
         spriteRenderer.Sprite = newSprite;
         spriteRenderer.Size = newSize;
     }
+
 
     public void OnCollisionEnter(Object otherO)
     {
@@ -65,17 +76,11 @@ public class GameObject
         PhysicsEngine.Destroy(rigidbody);
     }
 
-    public void Dead()
-    {
-
-    }
-
-    public void Draw(Graphics graphics, Camera camera)
+    public virtual void Draw(Graphics graphics, Camera camera)
     {
         int xOffset = (int)transform.position.x;
         int yOffset = (int)transform.position.y;
         spriteRenderer.Draw(graphics, camera, xOffset, yOffset);
     }
-
 }
 

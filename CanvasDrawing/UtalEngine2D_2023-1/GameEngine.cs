@@ -147,8 +147,10 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
 
         private static void Draw(Graphics graphics)
         {
-            foreach (GameObject go in GameObjectManager.AllGameObjects)
+
+            for (int i = 0; i < GameObjectManager.AllGameObjects.Count; i++)
             {
+                GameObject go = GameObjectManager.AllGameObjects[i];
                 Vector2 cameraPos = GameEngine.WorldToCameraPos(go.transform.position);
 
                 if (go is Bullet)
@@ -161,14 +163,12 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
                     go.Draw(graphics, MainCamera);
                 }
             }
-
-            foreach (UtalText utext in GameObjectManager.AllText)
+            for (int i = 0; i < GameObjectManager.AllText.Count; i++)
             {
+                UtalText utext = GameObjectManager.AllText[i];
                 utext.DrawString(graphics);
             }
         }
-
-
     }
 }
 

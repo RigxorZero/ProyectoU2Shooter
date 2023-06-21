@@ -26,6 +26,10 @@ namespace CanvasDrawing.UtalEngine2D_2023_1.Physics
             this.transform = transform;
             lastPos = transform.position;
         }
+        public void CreateRectCollider(float width, float height)
+        {
+            colliders.Add(new RectCollider(this, width, height));
+        }
         public void CreateCircleCollider(float radius)
         {
             colliders.Add(new CircleCollider(this, radius));

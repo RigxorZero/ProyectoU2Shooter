@@ -1,4 +1,5 @@
 ﻿using CanvasDrawing.UtalEngine2D_2023_1;
+using CanvasDrawing.UtalEngine2D_2023_1.Physics;
 using System.Drawing;
 
 
@@ -7,6 +8,8 @@ namespace CanvasDrawing.Game
     class Wall : GameObject
     {
         public bool PushDown;
+        private RectCollider collider;
+
         public Wall(Image newSprite, Vector2 newSize, float xPos, float yPos) : base(newSprite, newSize, xPos, yPos)
         {
         }
@@ -19,3 +22,5 @@ namespace CanvasDrawing.Game
         }
     }
 }
+
+
