@@ -60,6 +60,7 @@
     <Compile Include="Game\GameInicio.cs" />
     <Compile Include="Game\GameOverScreen.cs" />
     <Compile Include="Game\GameVictoryScreen.cs" />
+    <Compile Include="Game\Gun.cs" />
     <Compile Include="Game\Player.cs" />
     <Compile Include="Game\TimerBoard.cs" />
     <Compile Include="Game\Wall.cs" />
@@ -210,6 +211,13 @@
     <EmbeddedResource Include="Resources\MainCharacter\1_left4.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\MainCharacter\bulletb.png" />
+    <Content Include="Resources\MainCharacter\cannon_down.png" />
+    <Content Include="Resources\MainCharacter\cannon_left.png" />
+    <Content Include="Resources\MainCharacter\cannon_right.png" />
+    <Content Include="Resources\MainCharacter\cannon_up.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

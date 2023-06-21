@@ -9,7 +9,7 @@ public class GameObject
     public Transform transform = new Transform();
     public SpriteRenderer spriteRenderer = new SpriteRenderer();
 
-    public GameObject(Image newSprite, Vector2 newSize, float xPos = 0, float yPos = 0)
+    public GameObject(Image newSprite, Vector2 newSize, float xPos, float yPos)
     {
         Init(newSprite, newSize, true, xPos, yPos);
     }
@@ -26,7 +26,7 @@ public class GameObject
         if (hasCollider)
         {
             rigidbody = new Rigidbody();
-            rigidbody.transform = transform;
+            rigidbody.SetTransform(transform);
             rigidbody.CreateCircleCollider(newSize.x / 2);
             rigidbody.OnCollision = OnCollisionEnter;
             rigidbody.GetOnCollisionObject = GetOnCollision;
@@ -63,6 +63,11 @@ public class GameObject
     public virtual void OnDestroy()
     {
         PhysicsEngine.Destroy(rigidbody);
+    }
+
+    public void Dead()
+    {
+
     }
 
     public void Draw(Graphics graphics, Camera camera)

@@ -9,14 +9,14 @@ namespace CanvasDrawing.Game
     public class Player : Frame
     {
         private Dictionary<string, Animation> animations;
-        private Animation currentAnimation;
+        private KeyValuePair <string, Animation> currentAnimation;
         public Image sprite;
 
         public Player(float speed, Image newSprite, Vector2 newSize, float x = 0, float y = 0) : base(speed, newSprite, newSize, x, y)
         {
             // Inicializar el diccionario de animaciones
             animations = new Dictionary<string, Animation>();
-
+            currentAnimation = new KeyValuePair<string, Animation>();
             // Cargar las animaciones
             List<Image> upFrames = new List<Image>();
             upFrames.Add(Properties.Resources._1_north1);
@@ -50,6 +50,8 @@ namespace CanvasDrawing.Game
             Animation rightAnimation = new Animation(rightFrames, 0.25f);
             animations.Add("Right", rightAnimation);
 
+            new Gun(Properties.Resources.cannon_up, Properties.Resources.cannon_down, Properties.Resources.cannon_left, Properties.Resources.cannon_right, this);
+
             // Establecer la animación inicial
             SetAnimation("Down");
         }
@@ -57,20 +59,14 @@ namespace CanvasDrawing.Game
 
         public override void OnCollisionEnter(GameObject other)
         {
-            if (other is Frame)
-            {
-                Console.WriteLine("NPC");
-                GameEngine.Destroy(this);
-                GameEngine.playerLost = true;
-            }
         }
 
         public void SetAnimation(string animationName)
         {
-            if (animations.ContainsKey(animationName))
+            if (animations.ContainsKey(animationName) && animationName != currentAnimation.Key)
             {
-                currentAnimation = animations[animationName];
-                currentAnimation.Reset();
+                currentAnimation = new KeyValuePair<string, Animation>(animationName, animations[animationName]);
+                currentAnimation.Value.Reset();
             }
         }
 
@@ -80,7 +76,32 @@ namespace CanvasDrawing.Game
             bool moved = false;
             float moveSpeed = Speed * 100; // Velocidad de movimiento del jugador
 
+
             // Comprueba qué teclas están siendo presionadas y mueve al jugador en consecuencia
+            if (InputManager.GetKeyUp(Keys.Up))
+            {
+                SetAnimation("Up");
+                Bullet bup = new Bullet(new Vector2(0, -1), 400f, Properties.Resources.bulletb, new Vector2(10, 8), transform.position.x, transform.position.y);
+                bup.Rotation = -90f;
+            }
+            if (InputManager.GetKeyUp(Keys.Down))
+            {
+                SetAnimation("Down");
+                Bullet bup = new Bullet(new Vector2(0, 1), 400f, Properties.Resources.bulletb, new Vector2(10, 8), transform.position.x, transform.position.y);
+                bup.Rotation = 90f;
+            }
+            if (InputManager.GetKeyUp(Keys.Left))
+            {
+                SetAnimation("Left");
+                Bullet bup = new Bullet(new Vector2(-1, 0), 400f, Properties.Resources.bulletb, new Vector2(10, 8), transform.position.x, transform.position.y);
+                bup.Rotation = -180f;
+            }
+            if (InputManager.GetKeyUp(Keys.Right))
+            {
+                SetAnimation("Right");
+                Bullet bup = new Bullet(new Vector2(1, 0), 400f, Properties.Resources.bulletb, new Vector2(10, 8), transform.position.x, transform.position.y);
+                bup.Rotation = 0f;
+            }
             if (InputManager.GetKey(Keys.W))
             {
                 SetAnimation("Up");
@@ -121,10 +142,11 @@ namespace CanvasDrawing.Game
             if (moved)
             {
                 lastPos = auxLastPos;
-                currentAnimation.Update();
+                currentAnimation.Value.Update();
             }
-        }
 
+            spriteRenderer.Sprite = currentAnimation.Value.CurrentFrame;
+        }
     }
 }
 

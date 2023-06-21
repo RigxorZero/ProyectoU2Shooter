@@ -150,7 +150,16 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
             foreach (GameObject go in GameObjectManager.AllGameObjects)
             {
                 Vector2 cameraPos = GameEngine.WorldToCameraPos(go.transform.position);
-                go.Draw(graphics, MainCamera);
+
+                if (go is Bullet)
+                {
+                    Bullet bullet = (Bullet)go;
+                    bullet.DrawBullet(graphics, MainCamera);
+                }
+                else
+                {
+                    go.Draw(graphics, MainCamera);
+                }
             }
 
             foreach (UtalText utext in GameObjectManager.AllText)
@@ -158,6 +167,7 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
                 utext.DrawString(graphics);
             }
         }
+
 
     }
 }
