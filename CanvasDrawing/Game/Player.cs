@@ -12,6 +12,9 @@ namespace CanvasDrawing.Game
         private KeyValuePair <string, Animation> currentAnimation;
         public Image sprite;
         private Gun gun;
+        public int lifes = 3;
+        public int currentLifes;
+        private static HealthBar healthBar;
 
         public Player(float speed, Image newSprite, Vector2 newSize, float x = 0, float y = 0) : base(speed, newSprite, newSize, x, y)
         {
@@ -52,6 +55,10 @@ namespace CanvasDrawing.Game
             animations.Add("Right", rightAnimation);
 
             gun = new Gun(Properties.Resources.cannon_up, Properties.Resources.cannon_down, Properties.Resources.cannon_left, Properties.Resources.cannon_right, this);
+
+            // Después de crear el objeto Player
+            currentLifes = lifes;
+            GameEngine.healthBar = new HealthBar(new Vector2(50, 10), this, Properties.Resources.redHeart, Properties.Resources.grayHeart, Properties.Resources.HP);
 
             // Establecer la animación inicial
             SetAnimation("Down");
@@ -145,10 +152,9 @@ namespace CanvasDrawing.Game
                 lastPos = auxLastPos;
                 currentAnimation.Value.Update();
             }
-
-
-            
             spriteRenderer.Sprite = currentAnimation.Value.CurrentFrame;
+            GameEngine.healthBar.UpdateCurrentHealth(currentLifes);
+
         }
 
         public override void Draw(Graphics graphics, Camera camera)

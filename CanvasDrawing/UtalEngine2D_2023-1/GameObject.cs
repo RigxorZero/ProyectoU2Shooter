@@ -26,7 +26,7 @@ public class GameObject
 
         if (hasCollider)
         {
-            rigidbody = new Rigidbody();
+            rigidbody = new Rigidbody();    
             rigidbody.SetTransform(transform);
 
             if (this is Wall)

@@ -21,6 +21,10 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
         private static GameVictoryScreen gameVictoryScreen; /*  CREA LA PANTALLA DE VICTORIA  */
         private static GameOverScreen gameOverScreen; /*  CREA LA PANTALLA DE DERROTA  */
 
+        public static HealthBar healthBar;
+
+
+
         public static void Destroy(GameObject go)
         {
             GameObjectManager.AllDeadGameObjects.Add(go);
@@ -38,6 +42,7 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
         
         public static void InitEngine(Form engineDrawForm)
         {
+
             GameEngine.engineDrawForm = engineDrawForm;
             gameLoopThread = new Thread(GameLoop);
             //EngineDrawForm.Paint += new System.Windows.Forms.PaintEventHandler(Paint);
@@ -49,8 +54,11 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
             gameInicio = new GameInicio(engineDrawForm); /*  ASIGNA EL FORMULARIO ACTUAL A LA PANTALLA DE INICIO  */
             gameOverScreen = new GameOverScreen(engineDrawForm); /*  ASIGNA EL FORMULARIO ACTUAL A LA PANTALLA DE DERROTA  */
             gameVictoryScreen = new GameVictoryScreen(engineDrawForm); /*  ASIGNA EL FORMULARIO ACTUAL A LA PANTALLA DE VICTORIA  */
+
+
             gameInicio.Show();
             gameLoopThread.Start();
+
             
         }
 
@@ -148,6 +156,7 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
         private static void Draw(Graphics graphics)
         {
 
+
             for (int i = 0; i < GameObjectManager.AllGameObjects.Count; i++)
             {
                 GameObject go = GameObjectManager.AllGameObjects[i];
@@ -168,6 +177,8 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
                 UtalText utext = GameObjectManager.AllText[i];
                 utext.DrawString(graphics);
             }
+
+            healthBar.Draw(graphics);
         }
     }
 }

@@ -293,6 +293,26 @@ namespace CanvasDrawing.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap grayHeart {
+            get {
+                object obj = ResourceManager.GetObject("grayHeart", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap HP {
+            get {
+                object obj = ResourceManager.GetObject("HP", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Lose {
             get {
                 object obj = ResourceManager.GetObject("Lose", resourceCulture);
@@ -346,6 +366,16 @@ namespace CanvasDrawing.Properties {
         internal static System.Drawing.Bitmap Portal {
             get {
                 object obj = ResourceManager.GetObject("Portal", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap redHeart {
+            get {
+                object obj = ResourceManager.GetObject("redHeart", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

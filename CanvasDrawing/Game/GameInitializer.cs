@@ -7,6 +7,8 @@ namespace CanvasDrawing.Game
 {
     public static class GameInitializer
     {
+        private static HealthBar healthBar;
+
         public static void InitializeGame(Form form)
         {
             Image piso = Properties.Resources.Piso;
@@ -39,6 +41,7 @@ namespace CanvasDrawing.Game
             }
 
             new Player(2, jugador, new Vector2(50, 50), playerX, playerY);
+
 
             GameEngine.InitEngine(form);
         }
