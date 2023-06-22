@@ -7,9 +7,6 @@ namespace CanvasDrawing.Game
 {
     class Wall : GameObject
     {
-        public bool PushDown;
-        private RectCollider collider;
-
         public Wall(Image newSprite, Vector2 newSize, float xPos, float yPos) : base(newSprite, newSize, xPos, yPos)
         {
         }

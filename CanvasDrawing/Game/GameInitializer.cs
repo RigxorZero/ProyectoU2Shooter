@@ -7,7 +7,6 @@ namespace CanvasDrawing.Game
 {
     public static class GameInitializer
     {
-        private static HealthBar healthBar;
 
         public static void InitializeGame(Form form)
         {

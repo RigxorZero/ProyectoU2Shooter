@@ -14,8 +14,6 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
         private float frameDuration;
         private float frameTimer;
 
-        private GameObject attach;
-
         public Animation(List<Image> frames, float frameDuration)
         {
             this.frames = frames;

@@ -1,15 +1,8 @@
 ﻿using CanvasDrawing.Game;
 using CanvasDrawing.UtalEngine2D_2023_1;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System;
 using System.Windows.Forms;
-using System.Drawing;
-using CanvasDrawing.Game;
+
 
 namespace CanvasDrawing
 {

@@ -174,17 +174,16 @@ namespace CanvasDrawing.Game
             spriteRenderer.Sprite = currentAnimation.Value.CurrentFrame;
             GameEngine.healthBar.UpdateCurrentHealth(currentLifes);
             gun.Update(currentAnimation.Key);
-            Console.WriteLine(gun.transform.position);
-
         }
 
         public override void Draw(Graphics graphics, Camera camera)
         {
-            // Dibujar el sprite del jugador
-            base.Draw(graphics, camera);
-
+           
             // Dibujar el objeto Gun
             gun.Draw(graphics, camera);
+
+            // Dibujar el sprite del jugador
+            base.Draw(graphics, camera);
         }
     }
 }

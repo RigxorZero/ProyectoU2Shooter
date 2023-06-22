@@ -12,7 +12,6 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
     {
         private static Form engineDrawForm;
         private static Thread gameLoopThread = null;
-        private static int frameCount = 0;
         public static Camera MainCamera = new Camera();
 
         public static bool playerLost = false; // Variable para indicar si el jugador ha perdido
