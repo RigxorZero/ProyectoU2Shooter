@@ -14,7 +14,9 @@ namespace CanvasDrawing.Game
         private Gun gun;
         public int lifes = 3;
         public int currentLifes;
-        private static HealthBar healthBar;
+        private float timeSinceLastShot = 0f;
+        private float shotCooldown = 0.3f; // Tiempo de espera entre cada disparo
+
 
         public Player(float speed, Image newSprite, Vector2 newSize, float x = 0, float y = 0) : base(speed, newSprite, newSize, x, y)
         {
@@ -85,30 +87,49 @@ namespace CanvasDrawing.Game
             float moveSpeed = Speed * 100; // Velocidad de movimiento del jugador
             gun.Update(currentAnimation.Key);
 
+            // Actualizar el tiempo transcurrido desde el último disparo
+            timeSinceLastShot += Time.deltaTime;
+
             // Comprueba qué teclas están siendo presionadas y mueve al jugador en consecuencia
             if (InputManager.GetKeyUp(Keys.Up))
             {
-                SetAnimation("Up");
-                Bullet bup = new Bullet(new Vector2(0, -1), 400f, Properties.Resources.bulletb, new Vector2(10, 8), transform.position.x, transform.position.y - 7);
-                bup.Rotation = -90f;
+                if (timeSinceLastShot >= shotCooldown)
+                {
+                    SetAnimation("Up");
+                    Bullet bup = new Bullet(new Vector2(0, -1), 400f, Properties.Resources.bulletb, new Vector2(10, 8), transform.position.x, transform.position.y - 7);
+                    bup.Rotation = -90f;
+                    timeSinceLastShot = 0f; // Reinicia el tiempo transcurrido
+                }
             }
             if (InputManager.GetKeyUp(Keys.Down))
             {
-                SetAnimation("Down");
-                Bullet bup = new Bullet(new Vector2(0, 1), 400f, Properties.Resources.bulletb, new Vector2(10, 8), transform.position.x, transform.position.y + 7);
-                bup.Rotation = 90f;
+                if (timeSinceLastShot >= shotCooldown)
+                {
+                    SetAnimation("Down");
+                    Bullet bup = new Bullet(new Vector2(0, 1), 400f, Properties.Resources.bulletb, new Vector2(10, 8), transform.position.x, transform.position.y + 7);
+                    bup.Rotation = 90f;
+                    timeSinceLastShot = 0f; // Reinicia el tiempo transcurrido
+                }
             }
             if (InputManager.GetKeyUp(Keys.Left))
             {
-                SetAnimation("Left");
-                Bullet bup = new Bullet(new Vector2(-1, 0), 400f, Properties.Resources.bulletb, new Vector2(10, 8), transform.position.x - 7, transform.position.y);
-                bup.Rotation = -180f;
+                if (timeSinceLastShot >= shotCooldown)
+                {
+                    SetAnimation("Left");
+                    Bullet bup = new Bullet(new Vector2(-1, 0), 400f, Properties.Resources.bulletb, new Vector2(10, 8), transform.position.x - 7, transform.position.y);
+                    bup.Rotation = -180f;
+                    timeSinceLastShot = 0f; // Reinicia el tiempo transcurrido
+                }
             }
             if (InputManager.GetKeyUp(Keys.Right))
             {
-                SetAnimation("Right");
-                Bullet bup = new Bullet(new Vector2(1, 0), 400f, Properties.Resources.bulletb, new Vector2(10, 8), transform.position.x + 7, transform.position.y);
-                bup.Rotation = 0f;
+                if (timeSinceLastShot >= shotCooldown)
+                {
+                    SetAnimation("Right");
+                    Bullet bup = new Bullet(new Vector2(1, 0), 400f, Properties.Resources.bulletb, new Vector2(10, 8), transform.position.x + 7, transform.position.y);
+                    bup.Rotation = 0f;
+                    timeSinceLastShot = 0f; // Reinicia el tiempo transcurrido
+                }  
             }
             if (InputManager.GetKey(Keys.W))
             {
