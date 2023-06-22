@@ -54,6 +54,7 @@
     </Compile>
     <Compile Include="Game\BackgroundElement.cs" />
     <Compile Include="Game\Bullet.cs" />
+    <Compile Include="Game\EnemigoEstatico.cs" />
     <Compile Include="Game\Frame.cs" />
     <Compile Include="Game\FrameManager.cs" />
     <Compile Include="Game\GameInitializer.cs" />
@@ -224,6 +225,9 @@
     <Content Include="Resources\MainCharacter\cannon_right.png" />
     <Content Include="Resources\MainCharacter\cannon_up.png" />
     <Content Include="Resources\redHeart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\EnemigoEs\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

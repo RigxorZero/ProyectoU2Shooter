@@ -53,6 +53,5 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
             }
         }
     }
-
 }
 

@@ -57,7 +57,6 @@ namespace CanvasDrawing.Game
             animations.Add("Right", rightAnimation);
 
             gun = new Gun(Properties.Resources.cannon_up, Properties.Resources.cannon_down, Properties.Resources.cannon_left, Properties.Resources.cannon_right, this);
-
             // Después de crear el objeto Player
             currentLifes = lifes;
             GameEngine.healthBar = new HealthBar(new Vector2(50, 10), this, Properties.Resources.redHeart, Properties.Resources.grayHeart, Properties.Resources.HP);
@@ -85,7 +84,6 @@ namespace CanvasDrawing.Game
             Vector2 auxLastPos = transform.position;
             bool moved = false;
             float moveSpeed = Speed * 100; // Velocidad de movimiento del jugador
-            gun.Update(currentAnimation.Key);
 
             // Actualizar el tiempo transcurrido desde el último disparo
             timeSinceLastShot += Time.deltaTime;
@@ -140,7 +138,7 @@ namespace CanvasDrawing.Game
                     moved = true;
                 }
             }
-            if (InputManager.GetKey(Keys.S))
+            else if (InputManager.GetKey(Keys.S))
             {
                 SetAnimation("Down");
                 if (transform.position.y + (moveSpeed * Time.deltaTime) < 1080 * 2)
@@ -149,7 +147,7 @@ namespace CanvasDrawing.Game
                     moved = true;
                 }
             }
-            if (InputManager.GetKey(Keys.A))
+            else if (InputManager.GetKey(Keys.A))
             {
                 SetAnimation("Left");
                 if (transform.position.x - (moveSpeed * Time.deltaTime) > 0)
@@ -158,7 +156,7 @@ namespace CanvasDrawing.Game
                     moved = true;
                 }
             }
-            if (InputManager.GetKey(Keys.D))
+            else if (InputManager.GetKey(Keys.D))
             {
                 SetAnimation("Right");
                 if (transform.position.x + (moveSpeed * Time.deltaTime) < 1920 * 2)
@@ -175,6 +173,8 @@ namespace CanvasDrawing.Game
             }
             spriteRenderer.Sprite = currentAnimation.Value.CurrentFrame;
             GameEngine.healthBar.UpdateCurrentHealth(currentLifes);
+            gun.Update(currentAnimation.Key);
+            Console.WriteLine(gun.transform.position);
 
         }
 
@@ -184,7 +184,7 @@ namespace CanvasDrawing.Game
             base.Draw(graphics, camera);
 
             // Dibujar el objeto Gun
-            gun.Draw(graphics, this.myCamera);
+            gun.Draw(graphics, camera);
         }
     }
 }

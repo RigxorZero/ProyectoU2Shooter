@@ -8,13 +8,17 @@ using System.Threading.Tasks;
 
 namespace CanvasDrawing.Game
 {
-    public class Gun
+    public class Gun : GameObject
     {
         private Dictionary<string, Image> gunSprites;
         private Image currentSprite;
         private Player player;
+        private float gunOffsetX;
+        private float gunOffsetY;
 
-        public Gun(Image spriteUp, Image spriteDown, Image spriteLeft, Image spriteRight, Player player)
+
+        public Gun(Image spriteUp, Image spriteDown, Image spriteLeft, Image spriteRight, Player playerP)
+            : base(spriteUp, new Vector2(12,14), false, playerP.transform.position.x, playerP.transform.position.y)
         {
             gunSprites = new Dictionary<string, Image>();
             gunSprites.Add("Up", spriteUp);
@@ -23,7 +27,9 @@ namespace CanvasDrawing.Game
             gunSprites.Add("Right", spriteRight);
 
             currentSprite = spriteDown;
-            this.player = player;
+            player = playerP;
+            gunOffsetX = player.transform.position.x;
+            gunOffsetY = player.transform.position.y;
         }
 
         public void Update(string playerAnimation)
@@ -35,20 +41,19 @@ namespace CanvasDrawing.Game
             }
         }
 
-        public void Draw(Graphics graphics, Camera camera)
+        public override void Draw(Graphics graphics, Camera camera)
         {
-            // Dibujar el sprite del arma en la posición correcta en relación al jugador
-            int xOffset = (int)player.transform.position.x;
-            int yOffset = (int)player.transform.position.y;
-            int gunOffsetX = 0; // Ajusta este valor según la posición del arma con respecto al jugador
-            int gunOffsetY = 0; // Ajusta este valor según la posición del arma con respecto al jugador
 
-            int drawX = xOffset + gunOffsetX;
-            int drawY = yOffset + gunOffsetY;
+            // Calcular la posición de la pistola en relación al jugador
+            float gunPositionX = gunOffsetX;
+            float gunPositionY = gunOffsetY;
 
-            graphics.DrawImage(currentSprite, drawX, drawY);
+            // Dibujar el sprite del arma en la posición calculada en la pantalla
+            graphics.DrawImage(currentSprite, gunPositionX, gunPositionY);
         }
+
     }
 }
+
 
 

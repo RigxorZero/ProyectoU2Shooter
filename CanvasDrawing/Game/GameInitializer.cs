@@ -40,7 +40,7 @@ namespace CanvasDrawing.Game
                 }
             }
 
-            new Player(2, jugador, new Vector2(50, 50), playerX, playerY);
+            new Player(2, jugador, new Vector2(40, 48), playerX, playerY);
 
 
             GameEngine.InitEngine(form);
