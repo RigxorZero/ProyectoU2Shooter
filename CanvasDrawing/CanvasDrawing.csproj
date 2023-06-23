@@ -55,6 +55,7 @@
     <Compile Include="Game\BackgroundElement.cs" />
     <Compile Include="Game\Bullet.cs" />
     <Compile Include="Game\EnemigoEstatico.cs" />
+    <Compile Include="Game\EnemigoPerseguidor.cs" />
     <Compile Include="Game\Frame.cs" />
     <Compile Include="Game\FrameManager.cs" />
     <Compile Include="Game\GameInitializer.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="UtalEngine2D_2023-1\InputManager.cs" />
     <Compile Include="UtalEngine2D_2023-1\Physics\CircleCollider.cs" />
     <Compile Include="UtalEngine2D_2023-1\Physics\Collider.cs" />
+    <Compile Include="UtalEngine2D_2023-1\Physics\CollisionDetector.cs" />
     <Compile Include="UtalEngine2D_2023-1\Physics\PhysicsEngine.cs" />
     <Compile Include="UtalEngine2D_2023-1\Physics\RectCollider.cs" />
     <Compile Include="UtalEngine2D_2023-1\Physics\Rigidbody.cs" />
@@ -217,6 +219,27 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\bulleta.png" />
+    <Content Include="Resources\EnemigoPs\3_left1.png" />
+    <Content Include="Resources\EnemigoPs\3_left2.png" />
+    <Content Include="Resources\EnemigoPs\3_left3.png" />
+    <Content Include="Resources\EnemigoPs\3_left4.png" />
+    <Content Include="Resources\EnemigoPs\3_north1.png" />
+    <Content Include="Resources\EnemigoPs\3_north2.png" />
+    <Content Include="Resources\EnemigoPs\3_north3.png" />
+    <Content Include="Resources\EnemigoPs\3_north4.png" />
+    <Content Include="Resources\EnemigoPs\3_right1.png" />
+    <Content Include="Resources\EnemigoPs\3_right2.png" />
+    <Content Include="Resources\EnemigoPs\3_right3.png" />
+    <Content Include="Resources\EnemigoPs\3_right4.png" />
+    <Content Include="Resources\EnemigoPs\3_south1.png" />
+    <Content Include="Resources\EnemigoPs\3_south2.png" />
+    <Content Include="Resources\EnemigoPs\3_south3.png" />
+    <Content Include="Resources\EnemigoPs\3_south4.png" />
+    <Content Include="Resources\EnemigoPs\rocket_down.png" />
+    <Content Include="Resources\EnemigoPs\rocket_left.png" />
+    <Content Include="Resources\EnemigoPs\rocket_right.png" />
+    <Content Include="Resources\EnemigoPs\rocket_up.png" />
     <Content Include="Resources\grayHeart.png" />
     <Content Include="Resources\HP.png" />
     <Content Include="Resources\MainCharacter\bulletb.png" />

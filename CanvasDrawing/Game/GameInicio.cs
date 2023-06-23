@@ -33,16 +33,20 @@ namespace CanvasDrawing.Game
             form.AutoSizeMode = AutoSizeMode.GrowAndShrink;
 
             // Agrega el botón de exit
-            exitButton = new Button();
-            exitButton.Text = "EXIT";
-            exitButton.Size = new Size(100, 30);
+            exitButton = new Button
+            {
+                Text = "EXIT",
+                Size = new Size(100, 30)
+            };
             exitButton.Click += (buttonSender, buttonArgs) => ExitGame();
             form.Controls.Add(exitButton);
 
             // Agrega el botón de start
-            startButton = new Button();
-            startButton.Text = "START";
-            startButton.Size = new Size(100, 30);
+            startButton = new Button
+            {
+                Text = "START",
+                Size = new Size(100, 30)
+            };
             startButton.Click += (buttonSender, buttonArgs) => StartGame();
             form.Controls.Add(startButton);
 

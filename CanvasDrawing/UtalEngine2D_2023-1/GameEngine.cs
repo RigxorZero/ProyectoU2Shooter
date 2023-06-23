@@ -159,7 +159,6 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
             for (int i = 0; i < GameObjectManager.AllGameObjects.Count; i++)
             {
                 GameObject go = GameObjectManager.AllGameObjects[i];
-                Vector2 cameraPos = GameEngine.WorldToCameraPos(go.transform.position);
 
                 if (go is Bullet)
                 {

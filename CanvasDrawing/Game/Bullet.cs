@@ -1,4 +1,5 @@
 ﻿using CanvasDrawing.UtalEngine2D_2023_1;
+using System;
 using System.Drawing;
 
 namespace CanvasDrawing.Game
@@ -10,6 +11,8 @@ namespace CanvasDrawing.Game
         public float timeToDie = 5f;
         public float Rotation { get; set; }
         public GameObject Shooter { get; set; }
+        public bool playerBullet { get; set; }
+        public bool enemyBullet { get; set; }
         public bool isDead { get; private set; } = false;
 
         public Bullet(Vector2 dir, float speed, Image newSprite, Vector2 newSize, float xPos, float yPos) : base(newSprite, newSize, xPos, yPos)
@@ -50,12 +53,28 @@ namespace CanvasDrawing.Game
         public override void OnCollisionEnter(GameObject other)
         {
             // Comprobar si la bala colisiona con un muro
-            if (other is Wall)
+            if (other is Wall || other is Bullet)
             {
                 GameEngine.Destroy(this);
             }
+            else if(other is Player)
+            {
+                if(enemyBullet)
+                {
+                    Player player = (Player)other;
+                    player.currentLifes -= 1;
+                }
+            }
+            else if(other is EnemigoPerseguidor)
+            {
+                EnemigoPerseguidor enemy = (EnemigoPerseguidor)other;
+                if(playerBullet)
+                {
+                    enemy.DestroyGun();
+                    GameEngine.Destroy(other);
+                }
+            }
         }
-
 
     }
 }

@@ -10,7 +10,7 @@ public class GameObject
     public Transform transform = new Transform();
     public SpriteRenderer spriteRenderer = new SpriteRenderer();
 
-    public GameObject(Image newSprite, Vector2 newSize, float xPos, float yPos)
+    public GameObject(Image newSprite, Vector2 newSize, float xPos = 0, float yPos = 0)
     {
         Init(newSprite, newSize, true, xPos, yPos);
     }
@@ -29,7 +29,7 @@ public class GameObject
             rigidbody = new Rigidbody();    
             rigidbody.SetTransform(transform);
 
-            if (this is Wall)
+            if (this is Wall || this is Bullet)
             {
                 rigidbody.CreateRectCollider(newSize.x, newSize.y);
             }

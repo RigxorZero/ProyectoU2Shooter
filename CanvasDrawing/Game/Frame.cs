@@ -25,7 +25,6 @@ namespace CanvasDrawing.Game
             {
                 rand = new Random();
             }
-            Vector2 textPosition = GameEngine.WorldToCameraPos(transform.position);
             lastPos = transform.position;
 
         }

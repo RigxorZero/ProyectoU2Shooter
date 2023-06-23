@@ -8,7 +8,6 @@ namespace CanvasDrawing.Game
     public class GameVictoryScreen
     {
         private readonly Form form;
-        private Size formSize;
         private readonly SynchronizationContext synchronizationContext;
         private Button exitButton;
         private bool isInitialized;
@@ -17,7 +16,6 @@ namespace CanvasDrawing.Game
         public GameVictoryScreen(Form engineDrawForm)
         {
             form = engineDrawForm;
-            formSize = form.Size;
             synchronizationContext = SynchronizationContext.Current;
             engineDrawForm.Height = MainCamera.ySize;
             engineDrawForm.Width = MainCamera.xSize;

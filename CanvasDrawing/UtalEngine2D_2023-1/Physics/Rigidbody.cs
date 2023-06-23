@@ -36,52 +36,69 @@ namespace CanvasDrawing.UtalEngine2D_2023_1.Physics
         }
         public bool CheckCollision(Rigidbody otherRigid)
         {
-            foreach(Collider myC in colliders)
+            bool collisionDetected = false;
+            CollisionDetector collisionDetector = new CollisionDetector();
+
+            foreach (Collider myC in colliders)
             {
-                foreach(Collider otherC in otherRigid.colliders)
+                foreach (Collider otherC in otherRigid.colliders)
                 {
-                    if (myC.CheckCollision(otherC))
+                    if (collisionDetector.DetectCollision(myC, otherC))
                     {
-                        if(myC.isSolid && otherC.isSolid)
+                        collisionDetected = true;
+
+                        if (myC.isSolid && otherC.isSolid)
                         {
-                            bool checkSecondColl = false;
-                            Vector2 toOtherDirection = otherC.rigidbody.transform.position - transform.position;
-                            if (!otherC.rigidbody.isStatic)
+                            if ((myC is CircleCollider circleCollider1 && otherC is CircleCollider circleCollider2) ||
+                                (myC is RectCollider rectCollider1 && otherC is RectCollider rectCollider2) ||
+                                (myC is CircleCollider circleCollider && otherC is RectCollider rectCollider) ||
+                                (myC is RectCollider rectCollider3 && otherC is CircleCollider circleCollider3))
                             {
-                                checkSecondColl = true;
-                                otherC.rigidbody.transform.position = otherC.rigidbody.lastPos;                                                                                             
-                            }
-                            if (!isStatic)
-                            {
-                                checkSecondColl = true;
-                                transform.position = lastPos;                                                               
-                            }
-                            if(checkSecondColl && myC.CheckCollision(otherC))
-                            {
+                                Vector2 toOtherDirection = otherC.rigidbody.transform.position - transform.position;
+                                bool checkSecondColl = false;
+
                                 if (!otherC.rigidbody.isStatic)
                                 {
-                                    otherC.rigidbody.transform.position += toOtherDirection * Time.deltaTime;
+                                    checkSecondColl = true;
+                                    otherC.rigidbody.transform.position = otherC.rigidbody.lastPos;
                                 }
+
                                 if (!isStatic)
                                 {
-                                    transform.position -= toOtherDirection * Time.deltaTime;
+                                    checkSecondColl = true;
+                                    transform.position = lastPos;
+                                }
+
+                                if (checkSecondColl && collisionDetector.DetectCollision(myC, otherC))
+                                {
+                                    if (!otherC.rigidbody.isStatic)
+                                    {
+                                        otherC.rigidbody.transform.position += toOtherDirection * Time.deltaTime;
+                                    }
+
+                                    if (!isStatic)
+                                    {
+                                        transform.position -= toOtherDirection * Time.deltaTime;
+                                    }
                                 }
                             }
-
                         }
+
                         if (OnCollision != null && otherRigid.GetOnCollisionObject != null)
                         {
-                            OnCollision(otherRigid.GetOnCollisionObject());                            
+                            OnCollision(otherRigid.GetOnCollisionObject());
                         }
-                        if(GetOnCollisionObject != null && otherRigid.OnCollision != null)
+
+                        if (GetOnCollisionObject != null && otherRigid.OnCollision != null)
                         {
                             otherRigid.OnCollision(GetOnCollisionObject());
                         }
-                        return true;
                     }
                 }
             }
-            return false;
+
+            return collisionDetected;
         }
+
     }
 }

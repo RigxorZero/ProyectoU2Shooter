@@ -12,9 +12,8 @@ namespace CanvasDrawing.Game
         {
             Image piso = Properties.Resources.Piso;
             Image muro = Properties.Resources.Muro;
-            Image portalwin = Properties.Resources.Portal;
             Image jugador = Properties.Resources._1_south1;
-            Image NPC = Properties.Resources.Ghost;
+            Image NPC = Properties.Resources._3_south1;
 
             Random random = new Random();
 
@@ -34,12 +33,14 @@ namespace CanvasDrawing.Game
                     else
                     {
                         new BackgroundElement(piso, new Vector2(50, 50), i * 50 + 25, j * 50 + 25);
-                        int aux = random.Next(0, 2);
                     }
                 }
             }
 
-            new Player(2, jugador, new Vector2(40, 48), playerX, playerY);
+            Player player = Player.GetInstance(2, jugador, new Vector2(40, 48), playerX, playerY);
+
+            new EnemigoPerseguidor(2, NPC, new Vector2(40, 48), player, 500, 500);
+
 
 
             GameEngine.InitEngine(form);

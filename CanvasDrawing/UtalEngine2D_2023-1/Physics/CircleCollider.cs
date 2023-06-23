@@ -10,7 +10,7 @@ namespace CanvasDrawing.UtalEngine2D_2023_1.Physics
             this.radius = radius;
         }
 
-        public override bool CheckCollision(Collider other)
+        /*public override bool CheckCollision(Collider other)
         {
             CircleCollider otherC = other as CircleCollider;
             if(otherC != null)
@@ -21,11 +21,12 @@ namespace CanvasDrawing.UtalEngine2D_2023_1.Physics
 
                 if (squareDist < (radius + otherC.radius) * (otherC.radius + otherC.radius))
                 {
+                    Console.WriteLine("Fue en CircleCollider");
                     return true;
                 }
 
             }
             return false;
-        }
+        }*/
     }
 }
