@@ -9,6 +9,7 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
         private int currentHealth;
         private Image heartImage;
         private Image greyHeartImage;
+        public int score { get; set; }
 
         public HealthBar(Vector2 position, Player player, Image heartImage, Image greyHeartImage)
             : base(position, new Size(100, 100)) // Tamaño de la barra de salud ajustado a 100x100
@@ -19,9 +20,10 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
             this.greyHeartImage = ResizeImage(greyHeartImage, 11 * 4, 9 * 4); // Redimensionar las imágenes de corazón gris a 44x36
         }
 
-        public void UpdateCurrentHealth(int currentHealth)
+        public void UpdateCurrentHealth(int currentHealth, int scorePlayer)
         {
             this.currentHealth = currentHealth;
+            this.score = scorePlayer;
         }
 
         public override void Draw(Graphics graphics)
@@ -51,6 +53,13 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
 
             // Dibujar el valor de la barra de salud como texto
             graphics.DrawString(healthText, font, brush, textX, textY);
+
+            // Dibujar el puntaje
+            string scoreText = $"Score: {score}";
+            int scoreTextWidth = (int)graphics.MeasureString(scoreText, font).Width;
+            int scoreTextX = (int)position.x + 1700 + size.Width - scoreTextWidth + heartsTotalWidth - heartsOffsetX; // Calcular la posición del puntaje
+            int scoreTextY = (int)position.y + (heartImage.Height - font.Height) / 2; // Centrar verticalmente el puntaje con los corazones
+            graphics.DrawString(scoreText, font, brush, scoreTextX, scoreTextY);
         }
 
 

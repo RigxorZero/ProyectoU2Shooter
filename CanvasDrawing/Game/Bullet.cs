@@ -64,6 +64,10 @@ namespace CanvasDrawing.Game
                     GameEngine.Destroy(this);
                     Player player = (Player)other;
                     player.currentLifes -= 1;
+                    if(player.currentLifes <= 0)
+                    {
+                        GameEngine.playerLost = true;
+                    }
                 }
             }
             if(other is EnemigoPerseguidor)
@@ -71,11 +75,11 @@ namespace CanvasDrawing.Game
                 EnemigoPerseguidor enemy = (EnemigoPerseguidor)other;
                 if(playerBullet)
                 {
+                    Player.score += 1;
                     enemy.DestroyGun();
                     GameEngine.Destroy(other);
                 }
             }
         }
-
     }
 }

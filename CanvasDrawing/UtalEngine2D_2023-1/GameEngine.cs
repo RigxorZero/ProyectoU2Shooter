@@ -20,9 +20,14 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
         private static GameVictoryScreen gameVictoryScreen; /*  CREA LA PANTALLA DE VICTORIA  */
         private static GameOverScreen gameOverScreen; /*  CREA LA PANTALLA DE DERROTA  */
 
+        private static float timeSinceLastNPC = 0f;
+        private const float NPCGenerationInterval = 10f; // Intervalo de generación de NPC en segundos
+
         public static HealthBar healthBar;
 
-
+        public static Image NPC { get; private set; }
+        public static Image jugador { get; private set; }
+        public static Player player { get; private set; }
 
         public static void Destroy(GameObject go)
         {
@@ -49,10 +54,20 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
             engineDrawForm.KeyDown += new KeyEventHandler(InputManager.KeyDownHandler);
             engineDrawForm.KeyUp += new KeyEventHandler(InputManager.KeyUpHandler);
             engineDrawForm.Height = MainCamera.ySize * 2;
-            engineDrawForm.Width = MainCamera.xSize * 2; 
+            engineDrawForm.Width = MainCamera.xSize * 2;
+            jugador = Properties.Resources._1_south1;
+            NPC = Properties.Resources._3_south1;
+
+            Random random = new Random();
+
+            int playerX = random.Next(1, 11) * 50 + 25;
+            int playerY = random.Next(1, 11) * 50 + 25;
+            player = Player.GetInstance(2, jugador, new Vector2(40, 48), playerX, playerY);
+            player.currentLifes = 3;
             gameInicio = new GameInicio(engineDrawForm); /*  ASIGNA EL FORMULARIO ACTUAL A LA PANTALLA DE INICIO  */
             gameOverScreen = new GameOverScreen(engineDrawForm); /*  ASIGNA EL FORMULARIO ACTUAL A LA PANTALLA DE DERROTA  */
             gameVictoryScreen = new GameVictoryScreen(engineDrawForm); /*  ASIGNA EL FORMULARIO ACTUAL A LA PANTALLA DE VICTORIA  */
+
 
 
             gameInicio.Show();
@@ -83,6 +98,8 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
                 Time.UpdateDeltaTime();
                 GameObjectManager.Update();
                 PhysicsEngine.Update();
+                timeSinceLastNPC += Time.deltaTime;
+
 
                 if (playerLost) /*  VERIFICA SI EL JUGADOR PERDIO  */
                 {
@@ -96,6 +113,13 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
                     break; // Salir del bucle de juego
                 }
                 InputManager.Update();
+
+                if (timeSinceLastNPC >= NPCGenerationInterval)
+                {
+                    GenerateNPC();
+                    timeSinceLastNPC = 0f;
+                }
+
 
                 if (!gameInicio.IsActive && !playerLost && !playerWin)
                 {
@@ -180,6 +204,58 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
 
             healthBar.Draw(graphics);
         }
+
+        private static void GenerateNPC()
+        {
+            Random random = new Random();
+            Vector2 npcPosition = GetRandomPositionWithoutCollision();
+            Console.WriteLine("Creado en" + npcPosition.ToString());
+
+            // Crea el NPC en la posición generada
+            new EnemigoPerseguidor(2, NPC, new Vector2(40, 48), player, npcPosition.x, npcPosition.y);
+        }
+
+        private static Vector2 GetRandomPositionWithoutCollision()
+        {
+            Random random = new Random();
+            Vector2 position;
+
+            do
+            {
+                // Genera una posición aleatoria dentro de los límites del mundo
+                int x = random.Next(0, 1910 * 2);
+                int y = random.Next(0, 1070 * 2);
+                position = new Vector2(x, y);
+            }
+            while (HasCollisionWithSolidSurface(position));
+
+            return position;
+        }
+
+        private static bool HasCollisionWithSolidSurface(Vector2 position)
+        {
+            CollisionDetector collisionDetector = new CollisionDetector();
+
+            foreach (GameObject go in GameObjectManager.AllGameObjects)
+            {
+                if (go is Wall)
+                {
+                    foreach (Collider collider in go.rigidbody.colliders)
+                    {
+                        if (collisionDetector.DetectCollisionWithPoint(collider, position))
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            return false;
+        }
+
+
+
+
     }
 }
 

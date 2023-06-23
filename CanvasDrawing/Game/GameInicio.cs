@@ -36,8 +36,9 @@ namespace CanvasDrawing.Game
             exitButton = new Button
             {
                 Text = "EXIT",
-                Size = new Size(100, 30)
-            };
+                Size = new Size(100, 30),
+                BackColor = SystemColors.Control
+        };
             exitButton.Click += (buttonSender, buttonArgs) => ExitGame();
             form.Controls.Add(exitButton);
 
@@ -45,8 +46,9 @@ namespace CanvasDrawing.Game
             startButton = new Button
             {
                 Text = "START",
-                Size = new Size(100, 30)
-            };
+                Size = new Size(100, 30),
+                BackColor = SystemColors.Control
+        };
             startButton.Click += (buttonSender, buttonArgs) => StartGame();
             form.Controls.Add(startButton);
 

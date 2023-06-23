@@ -14,6 +14,7 @@ namespace CanvasDrawing.Game
         private readonly Gun gun;
         public int lifes = 3;
         public int currentLifes;
+        public static int score;
         private float timeSinceLastShot = 0f;
         private readonly float shotCooldown = 0.3f; // Tiempo de espera entre cada disparo
         private static Player instance; // Instancia única de Player
@@ -213,7 +214,7 @@ namespace CanvasDrawing.Game
                 currentAnimation.Value.Update();
             }
             spriteRenderer.Sprite = currentAnimation.Value.CurrentFrame;
-            GameEngine.healthBar.UpdateCurrentHealth(currentLifes);
+            GameEngine.healthBar.UpdateCurrentHealth(currentLifes, score);
             gun.Update(currentAnimation.Key);
         }
 

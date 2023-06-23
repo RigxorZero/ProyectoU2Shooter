@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,7 +38,48 @@ namespace CanvasDrawing.UtalEngine2D_2023_1.Physics
             return false;
         }
 
+        public bool DetectCollisionWithPoint(Collider collider, Vector2 point)
+        {
+            if (collider is RectCollider rectCollider)
+            {
+                return DetectRectPointCollision(rectCollider, point);
+            }
 
+            if (collider is CircleCollider circleCollider)
+            {
+                return DetectCirclePointCollision(circleCollider, point);
+            }
+
+            return false;
+        }
+
+        private bool DetectRectPointCollision(RectCollider rectCollider, Vector2 point)
+        {
+            float rectHalfWidth = rectCollider.Width / 2;
+            float rectHalfHeight = rectCollider.Height / 2;
+
+            float rectX = rectCollider.rigidbody.transform.position.x;
+            float rectY = rectCollider.rigidbody.transform.position.y;
+
+            float closestX = Math.Max(Math.Min(point.x, rectX + rectHalfWidth), rectX - rectHalfWidth);
+            float closestY = Math.Max(Math.Min(point.y, rectY + rectHalfHeight), rectY - rectHalfHeight);
+
+            float deltaX = point.x - closestX;
+            float deltaY = point.y - closestY;
+
+            float distanceSquared = deltaX * deltaX + deltaY * deltaY;
+
+            return distanceSquared <= 0;
+        }
+
+        private bool DetectCirclePointCollision(CircleCollider circleCollider, Vector2 point)
+        {
+            Vector2 distVector = point - circleCollider.rigidbody.transform.position;
+            float squareDist = distVector.x * distVector.x + distVector.y * distVector.y;
+            float squareRadius = circleCollider.radius * circleCollider.radius;
+
+            return squareDist <= squareRadius;
+        }
 
 
         private bool DetectRectRectCollision(RectCollider rectCollider1, RectCollider rectCollider2)
@@ -50,7 +92,7 @@ namespace CanvasDrawing.UtalEngine2D_2023_1.Physics
 
             if (intersectX > 0 && intersectY > 0)
             {
-                Console.WriteLine("Fue en Rect y Rect");
+                //Console.WriteLine("Fue en Rect y Rect");
                 return true;
             }
 
@@ -66,7 +108,7 @@ namespace CanvasDrawing.UtalEngine2D_2023_1.Physics
 
             if (squareDist < squareSumRadii)
             {
-                Console.WriteLine("Fue en Circle y Circle");
+                //Console.WriteLine("Fue en Circle y Circle");
                 return true;
             }
 
@@ -96,7 +138,7 @@ namespace CanvasDrawing.UtalEngine2D_2023_1.Physics
 
             if (distanceSquared < circleRadiusSquared)
             {
-                Console.WriteLine("Fue en Rect y Circle");
+                //Console.WriteLine("Fue en Rect y Circle");
                 return true;
             }
 

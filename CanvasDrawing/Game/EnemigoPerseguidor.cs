@@ -15,7 +15,6 @@ namespace CanvasDrawing.Game
         private KeyValuePair<string, Animation> currentAnimation;
         public Image sprite;
         private Gun gun;
-        private float timeSinceLastShot = 0f;
         private float timeSinceMovementChange = 0f;
         private float timeToPredict = 0.5f; // Tiempo en segundos para predecir la posición futura
         private bool isMovingTowardsPlayer = true;
@@ -85,16 +84,14 @@ namespace CanvasDrawing.Game
             float moveSpeed = Speed * 50; // Velocidad de movimiento del NPC
 
             // Actualizar el tiempo transcurrido desde el último disparo y movimiento
-            timeSinceLastShot += Time.deltaTime;
             timeSinceMovementChange += Time.deltaTime;
-            timeToPredict += Time.deltaTime;
 
             // Calcular la distancia en los ejes x e y entre el NPC y el jugador
             float distanceX = Math.Abs(transform.position.x - player.transform.position.x);
             float distanceY = Math.Abs(transform.position.y - player.transform.position.y);
 
             // Verificar si la distancia en ambos ejes es menor o igual a 1.5 veces el tamaño de la cámara
-            if (distanceX <= 0.5f * player.myCamera.xSize && distanceY <= 0.5f * player.myCamera.ySize)
+            if (distanceX <= 1.5f * player.myCamera.xSize && distanceY <= 1.5f * player.myCamera.ySize)
             {
                 // Verificar si ha pasado el tiempo para cambiar el movimiento
                 if (timeSinceMovementChange >= 2f && isMovingTowardsPlayer)
@@ -103,6 +100,8 @@ namespace CanvasDrawing.Game
                     timeSinceMovementChange = 0f;
                     Vector2 directionToPlayer = player.transform.position - transform.position;
                     directionToPlayer.Normalize();
+
+                    float timeToPredict = 0.5f;
 
                     Vector2 playerFuturePosition = player.transform.position + player.GetDirectionVector() * (player.Speed * timeToPredict);
 

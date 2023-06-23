@@ -32,11 +32,12 @@ namespace CanvasDrawing.Game
             // Desactiva temporalmente AutoSizeMode del formulario
             form.AutoSizeMode = AutoSizeMode.GrowAndShrink;
 
-            // Agrega el botón de reinicio
+            // Agrega el botón de salida
             restartButton = new Button();
-            restartButton.Text = "Restart";
+            restartButton.Text = "Salir";
             restartButton.Size = new Size(100, 30);
-            restartButton.Click += (buttonSender, buttonArgs) => RestartGame();
+            restartButton.BackColor = SystemColors.Control;
+            restartButton.Click += (buttonSender, buttonArgs) => ExitGame(); // Cambia el método a llamar a ExitGame()
             form.Controls.Add(restartButton);
 
             // Restablece AutoSizeMode del formulario
@@ -50,6 +51,7 @@ namespace CanvasDrawing.Game
             form.Refresh();
             //form.Paint -= Form_Paint;
         }
+
 
         public void Show()
         {
@@ -82,28 +84,21 @@ namespace CanvasDrawing.Game
 
             // Dibuja el fondo del texto
             RectangleF textBackgroundRect = new RectangleF(textPosition.X, textPosition.Y, textSize.Width, textSize.Height);
-            graphics.FillRectangle(Brushes.Yellow, textBackgroundRect);
+            graphics.FillRectangle(Brushes.Blue, textBackgroundRect);
 
             // Dibuja el texto
-            graphics.DrawString(gameOverText, font, Brushes.Black, textPosition);
+            graphics.DrawString(gameOverText, font, Brushes.White, textPosition);
 
             // Posiciona el botón de reinicio
             restartButton.Location = new Point((form.Width - restartButton.Width) / 2, (int)(textBackgroundRect.Bottom + 20));
-
-
         }
 
-        private void RestartGame()
+
+        private void ExitGame() // Agrega el método ExitGame()
         {
-            // Lógica para reiniciar el juego, vuelve las variables a false
-            GameEngine.playerWin = false;
-            GameEngine.playerLost = false;
-
-            form.Controls.Clear(); // Elimina todos los controles agregados al formulario
-
-            // Reinicia el juego utilizando GameInitializer
-            GameInitializer.InitializeGame(form);
-            
+            // Lógica para salir del juego
+            Application.Exit();
         }
+
     }
 }
