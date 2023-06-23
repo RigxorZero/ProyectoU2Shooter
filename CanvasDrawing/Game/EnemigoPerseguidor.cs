@@ -17,6 +17,7 @@ namespace CanvasDrawing.Game
         private Gun gun;
         private float timeSinceLastShot = 0f;
         private float timeSinceMovementChange = 0f;
+        private float timeToPredict = 0.5f; // Tiempo en segundos para predecir la posición futura
         private bool isMovingTowardsPlayer = true;
         Player player;
         public EnemigoPerseguidor(float Speed, Image newsprite, Vector2 newSize, Player target, float x = 0, float y = 0)
@@ -86,6 +87,7 @@ namespace CanvasDrawing.Game
             // Actualizar el tiempo transcurrido desde el último disparo y movimiento
             timeSinceLastShot += Time.deltaTime;
             timeSinceMovementChange += Time.deltaTime;
+            timeToPredict += Time.deltaTime;
 
             // Calcular la distancia en los ejes x e y entre el NPC y el jugador
             float distanceX = Math.Abs(transform.position.x - player.transform.position.x);
@@ -99,16 +101,20 @@ namespace CanvasDrawing.Game
                 {
                     isMovingTowardsPlayer = false;
                     timeSinceMovementChange = 0f;
-                    // Disparar una bala hacia el jugador
                     Vector2 directionToPlayer = player.transform.position - transform.position;
                     directionToPlayer.Normalize();
 
+                    Vector2 playerFuturePosition = player.transform.position + player.GetDirectionVector() * (player.Speed * timeToPredict);
+
+                    // Calcular la dirección hacia la posición futura del jugador
+                    Vector2 directionToFuturePlayerPosition = playerFuturePosition - transform.position;
+                    directionToFuturePlayerPosition.Normalize();
+
                     // Calcular un pequeño desplazamiento desde la posición actual del NPC
-                    Vector2 bulletOffset = directionToPlayer * 10f; // Ajusta el valor del desplazamiento según tus necesidades
-
-
-                    // Crear la bala en la posición actual del NPC
-                    Bullet bullet = new Bullet(directionToPlayer, 400f, Properties.Resources.bulleta, new Vector2(6, 6), transform.position.x + bulletOffset.x, transform.position.y + bulletOffset.y);
+                    Vector2 bulletOffset = directionToPlayer * 25f;
+                    timeToPredict = 0f;
+                    // Crear la bala con la dirección hacia la posición futura del jugador
+                    Bullet bullet = new Bullet(directionToFuturePlayerPosition, 400f, Properties.Resources.bulleta, new Vector2(6, 6), transform.position.x + bulletOffset.x, transform.position.y + bulletOffset.y);
                     bullet.Shooter = this;
                     bullet.enemyBullet = true;
                 }

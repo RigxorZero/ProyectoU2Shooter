@@ -168,6 +168,8 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
                 else
                 {
                     go.Draw(graphics, MainCamera);
+
+
                 }
             }
             for (int i = 0; i < GameObjectManager.AllText.Count; i++)

@@ -17,6 +17,7 @@ namespace CanvasDrawing.Game
         private float timeSinceLastShot = 0f;
         private readonly float shotCooldown = 0.3f; // Tiempo de espera entre cada disparo
         private static Player instance; // Instancia única de Player
+        public Vector2 Direction { get; set; }
 
 
         public Player(float speed, Image newSprite, Vector2 newSize, float x = 0, float y = 0) : base(speed, newSprite, newSize, x, y)
@@ -68,7 +69,7 @@ namespace CanvasDrawing.Game
             gun = new Gun(Properties.Resources.cannon_up, Properties.Resources.cannon_down, Properties.Resources.cannon_left, Properties.Resources.cannon_right, this);
             // Después de crear el objeto Player
             currentLifes = lifes;
-            GameEngine.healthBar = new HealthBar(new Vector2(50, 10), this, Properties.Resources.redHeart, Properties.Resources.grayHeart, Properties.Resources.HP);
+            GameEngine.healthBar = new HealthBar(new Vector2(50, 10), this, Properties.Resources.redHeart, Properties.Resources.grayHeart);
 
             // Establecer la animación inicial
             SetAnimation("Down");
@@ -215,6 +216,38 @@ namespace CanvasDrawing.Game
             GameEngine.healthBar.UpdateCurrentHealth(currentLifes);
             gun.Update(currentAnimation.Key);
         }
+
+        public Vector2 GetDirectionVector()
+        {
+            // Obtener las teclas presionadas para determinar la dirección
+            bool up = InputManager.GetKey(Keys.W);
+            bool down = InputManager.GetKey(Keys.S);
+            bool left = InputManager.GetKey(Keys.A);
+            bool right = InputManager.GetKey(Keys.D);
+
+            // Calcular el vector de dirección en función de las teclas presionadas
+            float x = 0f;
+            float y = 0f;
+
+            if (up && !down)
+                y = -1f;
+            else if (down && !up)
+                y = 1f;
+
+            if (left && !right)
+                x = -1f;
+            else if (right && !left)
+                x = 1f;
+
+            // Normalizar el vector de dirección si se están presionando múltiples teclas
+            Vector2 direction = new Vector2(x, y);
+            if (direction.x != 0 || direction.y != 0)
+                direction.Normalize();
+
+            return direction;
+
+        }
+
 
         public override void Draw(Graphics graphics, Camera camera)
         {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 
 namespace CanvasDrawing.UtalEngine2D_2023_1.Physics
 {
@@ -11,6 +12,16 @@ namespace CanvasDrawing.UtalEngine2D_2023_1.Physics
         {
             Width = width;
             Height = height;
+        }
+
+        public override void DrawCollider(Graphics graphics, Camera camera)
+        {
+            // Dibujar el collider del rectángulo
+            int x = (int)(rigidbody.transform.position.x - (Width / 2));
+            int y = (int)(rigidbody.transform.position.y - (Height / 2));
+            int w = (int)Width;
+            int h = (int)Height;
+            graphics.DrawRectangle(Pens.Red, x, y, w, h);
         }
 
         /*public override bool CheckCollision(Collider other)

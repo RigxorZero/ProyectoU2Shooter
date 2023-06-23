@@ -29,6 +29,11 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
             return new Vector2(a.x * b, a.y * b);
         }
 
+        public static Vector2 Zero
+        {
+            get { return new Vector2(0f, 0f); }
+        }
+
         public override string ToString()
         {
             return "x " + x + " y " + y;

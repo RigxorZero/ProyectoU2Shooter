@@ -9,16 +9,14 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
         private int currentHealth;
         private Image heartImage;
         private Image greyHeartImage;
-        private Image hpImage; // Nueva variable para la imagen de "hp"
 
-        public HealthBar(Vector2 position, Player player, Image heartImage, Image greyHeartImage, Image hpImage)
+        public HealthBar(Vector2 position, Player player, Image heartImage, Image greyHeartImage)
             : base(position, new Size(100, 100)) // Tamaño de la barra de salud ajustado a 100x100
         {
             this.maxHealth = player.lifes;
             this.currentHealth = player.currentLifes;
             this.heartImage = ResizeImage(heartImage, 11 * 4, 9 * 4); // Redimensionar las imágenes de corazón a 44x36
             this.greyHeartImage = ResizeImage(greyHeartImage, 11 * 4, 9 * 4); // Redimensionar las imágenes de corazón gris a 44x36
-            this.hpImage = ResizeImage(hpImage, 16 * 4, 10 * 4); // Redimensionar la imagen "hp" a 64x40
         }
 
         public void UpdateCurrentHealth(int currentHealth)
@@ -28,17 +26,35 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
 
         public override void Draw(Graphics graphics)
         {
-            // Dibujar la imagen "hp"
-            graphics.DrawImage(hpImage, (int)position.x, (int)position.y);
+            int heartsOffsetX = 100; // Desplazamiento adicional para los corazones
+            int heartsTotalWidth = maxHealth * heartImage.Width; // Ancho total de todos los corazones
+
+            int startX = (int)position.x + size.Width - heartsTotalWidth + heartsOffsetX; // Calcular la posición de inicio de los corazones
 
             for (int i = 0; i < maxHealth; i++)
             {
                 Image heart = i < currentHealth ? heartImage : greyHeartImage;
-                int heartX = (int)position.x + hpImage.Width + i * heartImage.Width; // Ajustar la posición en función de la imagen "hp"
+                int heartX = startX + i * heartImage.Width; // Ajustar la posición horizontal del corazón
                 int heartY = (int)position.y;
                 graphics.DrawImage(heart, heartX, heartY);
             }
+
+            // Calcular la posición horizontal del texto
+            string healthText = $"HP: ";
+            Font font = new Font("Monogram", 50);
+            Brush brush = Brushes.White;
+
+            int totalHeartsWidth = maxHealth * heartImage.Width;
+            int textWidth = (int)graphics.MeasureString(healthText, font).Width;
+            int textX = (int)position.x - 50 + totalHeartsWidth - textWidth; // Ajustar la posición horizontal del texto
+            int textY = (int)position.y + (heartImage.Height - font.Height) / 2; // Centrar verticalmente el texto con los corazones
+
+            // Dibujar el valor de la barra de salud como texto
+            graphics.DrawString(healthText, font, brush, textX, textY);
         }
+
+
+
 
         private Image ResizeImage(Image image, int width, int height)
         {
@@ -52,4 +68,5 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
         }
     }
 }
+
 

@@ -57,15 +57,16 @@ namespace CanvasDrawing.Game
             {
                 GameEngine.Destroy(this);
             }
-            else if(other is Player)
+            if(other is Player)
             {
                 if(enemyBullet)
                 {
+                    GameEngine.Destroy(this);
                     Player player = (Player)other;
                     player.currentLifes -= 1;
                 }
             }
-            else if(other is EnemigoPerseguidor)
+            if(other is EnemigoPerseguidor)
             {
                 EnemigoPerseguidor enemy = (EnemigoPerseguidor)other;
                 if(playerBullet)

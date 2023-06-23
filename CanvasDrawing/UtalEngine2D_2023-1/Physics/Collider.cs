@@ -1,4 +1,6 @@
 ﻿
+using System.Drawing;
+
 namespace CanvasDrawing.UtalEngine2D_2023_1.Physics
 {
     
@@ -11,6 +13,8 @@ namespace CanvasDrawing.UtalEngine2D_2023_1.Physics
             this.rigidbody = rigidbody;
         }
         //public abstract bool CheckCollision(Collider other);
+
+        public abstract void DrawCollider(Graphics graphics, Camera camera);
 
     }
 }
