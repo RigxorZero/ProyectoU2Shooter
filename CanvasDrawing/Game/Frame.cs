@@ -4,7 +4,7 @@ using System.Drawing;
 
 namespace CanvasDrawing.Game
 {
-    public class Frame : GameObject
+    public class Frame : GameObject //Se usa de herencia para todos los personajes
     {
         public static int LASTID = 0;
         public float Speed = 1;
@@ -34,8 +34,6 @@ namespace CanvasDrawing.Game
         }
         public override void OnCollisionEnter(GameObject other)
         {
-            //renderer.sprite.Dispose();
-            //GameEngine.Destroy(this); //Destruye al NPC
             FrameManager.AllFrames.Remove(this);
             Bullet b = other as Bullet;
             if (b != null)
@@ -43,7 +41,6 @@ namespace CanvasDrawing.Game
                 GameEngine.Destroy(b);
             }
         }
-
         public void GoBack()
         {
             transform.position = lastPos;

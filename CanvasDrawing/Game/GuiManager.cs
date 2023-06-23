@@ -4,7 +4,7 @@ using System.Drawing;
 
 namespace CanvasDrawing.UtalEngine2D_2023_1
 {
-    public static class GuiManager
+    public static class GuiManager //Manejador de la interfaz
     {
         private static List<GuiElement> guiElements = new List<GuiElement>();
 
@@ -17,7 +17,6 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
         {
             guiElements.Remove(guiElement);
         }
-
         public static void Draw(Graphics graphics)
         {
             foreach (GuiElement guiElement in guiElements)

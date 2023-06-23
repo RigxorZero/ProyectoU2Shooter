@@ -5,24 +5,20 @@ using System.Windows.Forms;
 
 namespace CanvasDrawing.Game
 {
-    public class GameInicio
+    public class GameInicio //Pantalla de inicio
     {
         private readonly Form form;
-        private Size formSize;
         private readonly SynchronizationContext synchronizationContext;
         private Button exitButton, startButton;
         private bool isInitialized;
         public static Camera MainCamera = new Camera();
-        public bool IsActive
-        {private set; get;}
+        public bool IsActive{private set; get;}
         public GameInicio(Form engineDrawForm)
         {
             form = engineDrawForm;
-            formSize = form.Size;
             synchronizationContext = SynchronizationContext.Current;
             engineDrawForm.Height = MainCamera.ySize;
             engineDrawForm.Width = MainCamera.xSize;
-
         }
         public void InitializeGameInicio()
         {
@@ -117,7 +113,6 @@ namespace CanvasDrawing.Game
         }
         private void StartGame()
         {
-
             // Crea una instancia del formulario del GameInitializer
             // Inicializa el juego
             form.Paint -= Form_Paint;

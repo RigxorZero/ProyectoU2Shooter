@@ -61,7 +61,6 @@
     <Compile Include="Game\GameInitializer.cs" />
     <Compile Include="Game\GameInicio.cs" />
     <Compile Include="Game\GameOverScreen.cs" />
-    <Compile Include="Game\GameVictoryScreen.cs" />
     <Compile Include="Game\GuiElement.cs" />
     <Compile Include="Game\GuiManager.cs" />
     <Compile Include="Game\Gun.cs" />

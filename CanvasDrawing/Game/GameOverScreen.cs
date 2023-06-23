@@ -5,10 +5,9 @@ using System.Windows.Forms;
 
 namespace CanvasDrawing.Game
 {
-    public class GameOverScreen
+    public class GameOverScreen //Pantalla derrota
     {
         private readonly Form form;
-        private Size formSize;
         private readonly SynchronizationContext synchronizationContext;
         private Button restartButton;
         private bool isInitialized;
@@ -17,13 +16,10 @@ namespace CanvasDrawing.Game
         public GameOverScreen(Form engineDrawForm)
         {
             form = engineDrawForm;
-            formSize = form.Size;
             synchronizationContext = SynchronizationContext.Current;
             engineDrawForm.Height = MainCamera.ySize;
             engineDrawForm.Width = MainCamera.xSize;
         }
-
-
         private void InitializeGameOverScreen()
         {
             if (isInitialized)
@@ -51,19 +47,15 @@ namespace CanvasDrawing.Game
             form.Refresh();
             //form.Paint -= Form_Paint;
         }
-
-
         public void Show()
         {
             synchronizationContext.Send(state => DrawGameOverScreen(), null);
         }
-
         private void DrawGameOverScreen()
         {
             InitializeGameOverScreen();
             // Invalida el formulario para disparar el evento Paint
         }
-
         private void Form_Paint(object sender, PaintEventArgs e)
         {
             Graphics graphics = e.Graphics;
@@ -74,9 +66,7 @@ namespace CanvasDrawing.Game
             graphics.DrawImage(loseImage, destinationRectangle);
 
             // Dibuja el contenido adicional de la pantalla de Game Over
-            // Aquí puedes agregar tu lógica de dibujo
-
-            // Ejemplo: Dibujar un texto en el centro del formulario
+            
             string gameOverText = "Game Over";
             Font font = new Font("Arial", 20, FontStyle.Bold);
             SizeF textSize = graphics.MeasureString(gameOverText, font);
@@ -92,8 +82,6 @@ namespace CanvasDrawing.Game
             // Posiciona el botón de reinicio
             restartButton.Location = new Point((form.Width - restartButton.Width) / 2, (int)(textBackgroundRect.Bottom + 20));
         }
-
-
         private void ExitGame() // Agrega el método ExitGame()
         {
             // Lógica para salir del juego

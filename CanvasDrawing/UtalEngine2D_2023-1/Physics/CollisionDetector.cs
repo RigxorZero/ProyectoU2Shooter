@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CanvasDrawing.UtalEngine2D_2023_1.Physics
 {
-    public class CollisionDetector
+    public class CollisionDetector //Detecta todas las colisiones posibles
     {
         public bool DetectCollision(Collider collider1, Collider collider2)
         {

@@ -1,10 +1,6 @@
 ﻿using CanvasDrawing.UtalEngine2D_2023_1;
-using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CanvasDrawing.Game
 {
@@ -19,6 +15,7 @@ namespace CanvasDrawing.Game
         public Gun(Image spriteUp, Image spriteDown, Image spriteLeft, Image spriteRight, GameObject owner)
             : base(spriteUp, CalculateSize(spriteUp), false, owner.transform.position.x, owner.transform.position.y)
         {
+            //Diccionario de sprite del arma
             gunSprites = new Dictionary<string, Image>
             {
                 { "Up", ResizeImage(spriteUp, CalculateWidth(spriteUp), CalculateHeight(spriteUp)) },
@@ -32,7 +29,6 @@ namespace CanvasDrawing.Game
             gunOffsetX = 0;
             gunOffsetY = -currentSprite.Height;
         }
-
         public void Update(string ownerAnimation)
         {
             if (gunSprites.ContainsKey(ownerAnimation))
@@ -40,7 +36,7 @@ namespace CanvasDrawing.Game
                 currentSprite = gunSprites[ownerAnimation];
                 spriteRenderer.Sprite = currentSprite;
             }
-
+            //A veces tira error, aun no comprobamos que lo provoca
             switch (ownerAnimation)
             {
                 case "Up":
@@ -65,7 +61,7 @@ namespace CanvasDrawing.Game
                     break;
             }
         }
-
+        //Dibuja el arma
         public override void Draw(Graphics graphics, Camera camera)
         {
             int gunPositionX = (int)(owner.transform.position.x + gunOffsetX);
@@ -73,7 +69,7 @@ namespace CanvasDrawing.Game
 
             spriteRenderer.Draw(graphics, camera, gunPositionX, gunPositionY);
         }
-
+        //Redimensiona el sprite según el arma
         private Image ResizeImage(Image image, int width, int height)
         {
             Image resizedImage = new Bitmap(width, height);
@@ -83,17 +79,15 @@ namespace CanvasDrawing.Game
             }
             return resizedImage;
         }
-
+        //Calcula el nuevo tamaño
         private static Vector2 CalculateSize(Image image)
         {
             return new Vector2(CalculateWidth(image), CalculateHeight(image));
         }
-
         private static int CalculateWidth(Image image)
         {
             return image.Width;
         }
-
         private static int CalculateHeight(Image image)
         {
             return image.Height;

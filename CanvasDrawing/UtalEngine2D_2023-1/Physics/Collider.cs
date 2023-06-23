@@ -2,8 +2,7 @@
 using System.Drawing;
 
 namespace CanvasDrawing.UtalEngine2D_2023_1.Physics
-{
-    
+{ 
     public abstract class Collider
     {
         public Rigidbody rigidbody;

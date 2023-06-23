@@ -2,10 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace CanvasDrawing.Game
 {
@@ -16,13 +12,12 @@ namespace CanvasDrawing.Game
         public Image sprite;
         private Gun gun;
         private float timeSinceMovementChange = 0f;
-        private float timeToPredict = 0.5f; // Tiempo en segundos para predecir la posición futura
         private bool isMovingTowardsPlayer = true;
         Player player;
         public EnemigoPerseguidor(float Speed, Image newsprite, Vector2 newSize, Player target, float x = 0, float y = 0)
             : base(Speed, newsprite, newSize, x, y)
         {
-
+            //Asigna jugador como objetivo
             player = target;
 
             // Inicializar el diccionario de animaciones
@@ -61,13 +56,13 @@ namespace CanvasDrawing.Game
             Animation rightAnimation = new Animation(rightFrames, 0.25f);
             animations.Add("Right", rightAnimation);
 
-
+            //Crea el arma
             gun = new Gun(Properties.Resources.rocket_up, Properties.Resources.rocket_down, Properties.Resources.rocket_left, Properties.Resources.rocket_right, this);
 
             // Establecer la animación inicial
             SetAnimation("Down");
         }
-
+        //Envia la animación actual
         public void SetAnimation(string animationName)
         {
             if (animations.ContainsKey(animationName) && animationName != currentAnimation.Key)
@@ -76,14 +71,14 @@ namespace CanvasDrawing.Game
                 currentAnimation.Value.Reset();
             }
         }
-
+        //Actualiza al enemigo
         public override void Update()
         {
             Vector2 auxLastPos = transform.position;
             bool moved = false;
             float moveSpeed = Speed * 50; // Velocidad de movimiento del NPC
 
-            // Actualizar el tiempo transcurrido desde el último disparo y movimiento
+            // Actualizar el tiempo transcurrido desde el último movimiento
             timeSinceMovementChange += Time.deltaTime;
 
             // Calcular la distancia en los ejes x e y entre el NPC y el jugador
@@ -118,7 +113,7 @@ namespace CanvasDrawing.Game
                     bullet.enemyBullet = true;
 
                 }
-                else if (timeSinceMovementChange >= 1.5f && !isMovingTowardsPlayer)
+                else if (timeSinceMovementChange >= 1.5f && !isMovingTowardsPlayer) //Se aleja del jugador
                 {
                     isMovingTowardsPlayer = true;
                     timeSinceMovementChange = 0f;
@@ -131,13 +126,11 @@ namespace CanvasDrawing.Game
                 transform.position += direction * moveSpeed * Time.deltaTime;
                 moved = true;
             }
-
-            if (moved)
+            if (moved) //En caso de moverse
             {
                 lastPos = auxLastPos;
                 currentAnimation.Value.Update();
             }
-
             // Establecer la animación según la dirección de movimiento
             if (Math.Abs(transform.position.x - auxLastPos.x) > Math.Abs(transform.position.y - auxLastPos.y))
             {
@@ -167,22 +160,19 @@ namespace CanvasDrawing.Game
 
 
         }
-
+        //Destruye el arma
         public void DestroyGun()
         {
             gun = null;
         }
-
-
+        //Dibujo del enemigo
         public override void Draw(Graphics graphics, Camera camera)
         {
-
             if (gun != null)
             {
                 // Dibujar el objeto Gun
                 gun.Draw(graphics, camera);
             }
-
             // Dibujar el sprite del jugador
             base.Draw(graphics, camera);
         }

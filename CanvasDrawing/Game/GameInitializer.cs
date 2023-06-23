@@ -1,13 +1,11 @@
 ﻿using CanvasDrawing.UtalEngine2D_2023_1;
 using System.Windows.Forms;
-using System;
 using System.Drawing;
 
 namespace CanvasDrawing.Game
 {
-    public static class GameInitializer
+    public static class GameInitializer //Dibuja el tablero
     {
-
         public static void InitializeGame(Form form)
         {
             Image piso = Properties.Resources.Piso;
@@ -28,8 +26,6 @@ namespace CanvasDrawing.Game
                     }
                 }
             }
-
-
             GameEngine.InitEngine(form);
         }
     }

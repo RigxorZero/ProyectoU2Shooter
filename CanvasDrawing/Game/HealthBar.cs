@@ -16,16 +16,16 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
         {
             this.maxHealth = player.lifes;
             this.currentHealth = player.currentLifes;
-            this.heartImage = ResizeImage(heartImage, 11 * 4, 9 * 4); // Redimensionar las imágenes de corazón a 44x36
-            this.greyHeartImage = ResizeImage(greyHeartImage, 11 * 4, 9 * 4); // Redimensionar las imágenes de corazón gris a 44x36
+            this.heartImage = ResizeImage(heartImage, 44, 36); // Redimensionar las imágenes de corazón a 44x36
+            this.greyHeartImage = ResizeImage(greyHeartImage, 44, 36); // Redimensionar las imágenes de corazón gris a 44x36
         }
-
+        //Actualiza el HUD
         public void UpdateCurrentHealth(int currentHealth, int scorePlayer)
         {
             this.currentHealth = currentHealth;
             this.score = scorePlayer;
         }
-
+        //Dibuja el HUD
         public override void Draw(Graphics graphics)
         {
             int heartsOffsetX = 100; // Desplazamiento adicional para los corazones
@@ -61,10 +61,7 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
             int scoreTextY = (int)position.y + (heartImage.Height - font.Height) / 2; // Centrar verticalmente el puntaje con los corazones
             graphics.DrawString(scoreText, font, brush, scoreTextX, scoreTextY);
         }
-
-
-
-
+        //Redimensiona imagenes
         private Image ResizeImage(Image image, int width, int height)
         {
             // Redimensionar la imagen al tamaño especificado

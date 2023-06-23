@@ -1,5 +1,4 @@
 ﻿using CanvasDrawing.UtalEngine2D_2023_1;
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -19,7 +18,6 @@ namespace CanvasDrawing.Game
         private readonly float shotCooldown = 0.3f; // Tiempo de espera entre cada disparo
         private static Player instance; // Instancia única de Player
         public Vector2 Direction { get; set; }
-
 
         public Player(float speed, Image newSprite, Vector2 newSize, float x = 0, float y = 0) : base(speed, newSprite, newSize, x, y)
         {
@@ -66,17 +64,16 @@ namespace CanvasDrawing.Game
             };
             Animation rightAnimation = new Animation(rightFrames, 0.25f);
             animations.Add("Right", rightAnimation);
-
+            //Crea el arma
             gun = new Gun(Properties.Resources.cannon_up, Properties.Resources.cannon_down, Properties.Resources.cannon_left, Properties.Resources.cannon_right, this);
-            // Después de crear el objeto Player
+            //Después de crear el objeto Player
             currentLifes = lifes;
             GameEngine.healthBar = new HealthBar(new Vector2(50, 10), this, Properties.Resources.redHeart, Properties.Resources.grayHeart);
 
-            // Establecer la animación inicial
+            //Establecer la animación inicial
             SetAnimation("Down");
         }
-
-
+        //Posicion del jugador
         public Vector2 GetPosition()
         {
             return transform.position;
@@ -85,7 +82,7 @@ namespace CanvasDrawing.Game
         public override void OnCollisionEnter(GameObject other)
         {
         }
-
+        //Consigue instancia player
         public static Player GetInstance(float speed, Image newSprite, Vector2 newSize, float x = 0, float y = 0)
         {
             if (instance == null)
@@ -94,7 +91,7 @@ namespace CanvasDrawing.Game
             }
             return instance;
         }
-
+        //Envia la animación
         public void SetAnimation(string animationName)
         {
             if (animations.ContainsKey(animationName) && animationName != currentAnimation.Key)
@@ -103,7 +100,7 @@ namespace CanvasDrawing.Game
                 currentAnimation.Value.Reset();
             }
         }
-
+        //Actualiza al player
         public override void Update()
         {
             Vector2 auxLastPos = transform.position;
@@ -217,7 +214,7 @@ namespace CanvasDrawing.Game
             GameEngine.healthBar.UpdateCurrentHealth(currentLifes, score);
             gun.Update(currentAnimation.Key);
         }
-
+        //Calcula la dirección del player
         public Vector2 GetDirectionVector()
         {
             // Obtener las teclas presionadas para determinar la dirección
@@ -248,8 +245,7 @@ namespace CanvasDrawing.Game
             return direction;
 
         }
-
-
+        //Dibuja al jugador y su arma
         public override void Draw(Graphics graphics, Camera camera)
         {
             // Dibujar el objeto Gun debajo del jugador

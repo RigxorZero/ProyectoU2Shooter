@@ -21,7 +21,6 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
             currentFrameIndex = 0;
             frameTimer = 0;
         }
-
         public Image CurrentFrame
         {
             get { return frames[currentFrameIndex]; }

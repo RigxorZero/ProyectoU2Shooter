@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CanvasDrawing.UtalEngine2D_2023_1
 {
-    public class SpriteRenderer
+    public class SpriteRenderer //Reemplaza a renderer de GameObject
     {
         public Image Sprite { get; set; }
         public Vector2 Position { get; set; }
