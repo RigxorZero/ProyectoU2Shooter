@@ -1,6 +1,7 @@
 ﻿using CanvasDrawing.UtalEngine2D_2023_1;
 using System;
 using System.Drawing;
+using System.Threading.Tasks;
 
 namespace CanvasDrawing.Game
 {
@@ -14,6 +15,8 @@ namespace CanvasDrawing.Game
         public bool playerBullet { get; set; }
         public bool enemyBullet { get; set; }
         public bool isDead { get; private set; } = false;
+        private bool isSlowMotionActive = false;
+        private float slowMotionTimer = 0f;
 
         public Bullet(Vector2 dir, float speed, Image newSprite, Vector2 newSize, float xPos, float yPos) : base(newSprite, newSize, xPos, yPos)
         {
@@ -34,6 +37,19 @@ namespace CanvasDrawing.Game
         public override void Update()
         {
             base.Update();
+
+            // Si se está aplicando la ralentización del tiempo
+            if (isSlowMotionActive)
+            {
+                // Reduce el valor del temporizador de ralentización
+                slowMotionTimer -= Time.deltaTime;
+
+                // Si el temporizador alcanza 0, desactiva la ralentización
+                if (slowMotionTimer <= 0f)
+                {
+                    isSlowMotionActive = false;
+                }
+            }
             //Modifica la posición
             transform.position += Direction * Speed * Time.deltaTime;
             //Si supera el tiempo, desaparece
@@ -68,15 +84,19 @@ namespace CanvasDrawing.Game
                     }
                 }
             }
-            //Comprobar si colisiona con un NPC perseguidor
-            if(other is EnemigoPerseguidor)
+            // Comprobar si colisiona con un NPC perseguidor
+            if (other is EnemigoPerseguidor)
             {
                 EnemigoPerseguidor enemy = (EnemigoPerseguidor)other;
-                if(playerBullet)
+                if (playerBullet)
                 {
                     Player.score += 1;
                     enemy.DestroyGun();
                     GameEngine.Destroy(other);
+
+                    // Ralentizar el tiempo durante 2 segundos
+                    Time.SetTimeScale(0.5f);
+                    Task.Delay(TimeSpan.FromSeconds(2)).ContinueWith(_ => Time.SetTimeScale(1f));
                 }
             }
         }

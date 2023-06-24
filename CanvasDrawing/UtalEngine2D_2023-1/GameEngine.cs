@@ -27,6 +27,13 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
         public static Image NPC { get; private set; }
         public static Image jugador { get; private set; }
         public static Player player { get; private set; }
+        private static float timeScale = 1f;
+        public static float TimeScale
+        {
+            get { return timeScale; }
+            set { timeScale = value; }
+        }
+
         //Clases destroy
         public static void Destroy(GameObject go)
         {
@@ -89,10 +96,12 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
                 {
                     engineDrawForm.Invalidate();
                 }
+
                 //Actualiza tiempo, objetos y fisicas
                 Time.UpdateDeltaTime();
                 GameObjectManager.Update();
                 PhysicsEngine.Update();
+
                 //Aumenta el tiempo de generación de npc
                 timeSinceLastNPC += Time.deltaTime;
                 //Verifica si perdio el jugador
