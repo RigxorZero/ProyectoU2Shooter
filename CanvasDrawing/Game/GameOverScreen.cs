@@ -66,22 +66,46 @@ namespace CanvasDrawing.Game
             graphics.DrawImage(loseImage, destinationRectangle);
 
             // Dibuja el contenido adicional de la pantalla de Game Over
-            
+
             string gameOverText = "Game Over";
             Font font = new Font("Arial", 20, FontStyle.Bold);
             SizeF textSize = graphics.MeasureString(gameOverText, font);
             PointF textPosition = new PointF(form.Width / 2 - textSize.Width / 2, form.Height / 2 - textSize.Height / 2);
 
+            // Calcula las dimensiones y posiciones del rectángulo de fondo del texto
+            float textPadding = 10;
+            float textBackgroundWidth = textSize.Width + textPadding * 2;
+            float textBackgroundHeight = textSize.Height + textPadding * 2;
+            PointF textBackgroundPosition = new PointF(form.Width / 2 - textBackgroundWidth / 2, form.Height / 2 - textBackgroundHeight / 2);
+
             // Dibuja el fondo del texto
-            RectangleF textBackgroundRect = new RectangleF(textPosition.X, textPosition.Y, textSize.Width, textSize.Height);
-            graphics.FillRectangle(Brushes.Blue, textBackgroundRect);
+            graphics.FillRectangle(Brushes.Blue, textBackgroundPosition.X, textBackgroundPosition.Y, textBackgroundWidth, textBackgroundHeight);
 
             // Dibuja el texto
             graphics.DrawString(gameOverText, font, Brushes.White, textPosition);
 
+            // Dibuja el puntaje final
+            string scoreText = "Score: " + Player.score.ToString();
+            Font scoreFont = new Font("Arial", 16);
+            SizeF scoreTextSize = graphics.MeasureString(scoreText, scoreFont);
+            PointF scoreTextPosition = new PointF(form.Width / 2 - scoreTextSize.Width / 2, textBackgroundPosition.Y + textBackgroundHeight + textPadding);
+
+            // Calcula las dimensiones y posiciones del rectángulo de fondo del puntaje final
+            float scorePadding = 10;
+            float scoreBackgroundWidth = scoreTextSize.Width + scorePadding * 2;
+            float scoreBackgroundHeight = scoreTextSize.Height + scorePadding * 2;
+            PointF scoreBackgroundPosition = new PointF(form.Width / 2 - scoreBackgroundWidth / 2, scoreTextPosition.Y);
+
+            // Dibuja el fondo del puntaje final
+            graphics.FillRectangle(Brushes.Blue, scoreBackgroundPosition.X, scoreBackgroundPosition.Y, scoreBackgroundWidth, scoreBackgroundHeight);
+
+            // Dibuja el texto del puntaje
+            graphics.DrawString(scoreText, scoreFont, Brushes.White, scoreTextPosition);
+
             // Posiciona el botón de reinicio
-            restartButton.Location = new Point((form.Width - restartButton.Width) / 2, (int)(textBackgroundRect.Bottom + 20));
+            restartButton.Location = new Point((form.Width - restartButton.Width) / 2, (int)(scoreBackgroundPosition.Y + scoreBackgroundHeight + 40));
         }
+
         private void ExitGame() // Agrega el método ExitGame()
         {
             // Lógica para salir del juego

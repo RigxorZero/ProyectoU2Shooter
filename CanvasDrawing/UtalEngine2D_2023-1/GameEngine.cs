@@ -72,9 +72,7 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
             NPC = Properties.Resources._3_south1;
             //Gestión de spawn de player
             Random random = new Random();
-            int playerX = random.Next(1, 11) * 50 + 25;
-            int playerY = random.Next(1, 11) * 50 + 25;
-            player = Player.GetInstance(2, jugador, new Vector2(40, 48), playerX, playerY);
+            player = Player.GetInstance(2, jugador, new Vector2(40, 48), 100, 100);
             player.currentLifes = 3;
             //Crea instancias de otras pantallas
             gameInicio = new GameInicio(engineDrawForm);
