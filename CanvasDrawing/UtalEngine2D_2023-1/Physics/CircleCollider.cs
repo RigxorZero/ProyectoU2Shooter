@@ -11,7 +11,16 @@ namespace CanvasDrawing.UtalEngine2D_2023_1.Physics
             this.radius = radius;
         }
 
-        public override bool CheckCollision(Collider other)
+        public override void DrawCollider(Graphics graphics, Camera camera)
+        {
+            // Dibujar el collider del círculo
+            int x = (int)(rigidbody.transform.position.x - radius);
+            int y = (int)(rigidbody.transform.position.y - radius);
+            int diameter = (int)(radius * 2);
+            graphics.DrawEllipse(Pens.Red, x, y, diameter, diameter);
+        }
+
+        /*public override bool CheckCollision(Collider other)
         {
             CircleCollider otherC = other as CircleCollider;
             if(otherC != null)
@@ -22,25 +31,12 @@ namespace CanvasDrawing.UtalEngine2D_2023_1.Physics
 
                 if (squareDist < (radius + otherC.radius) * (otherC.radius + otherC.radius))
                 {
+                    Console.WriteLine("Fue en CircleCollider");
                     return true;
                 }
 
             }
             return false;
-        }
-
-        public override void DrawCollider(Graphics graphics, Camera camera)
-        {
-            int xOffset = 0;
-            int yOffset = 0;
-
-            // Calcular la posición y el radio del círculo en las coordenadas de la cámara
-            float circleX = (rigidbody.transform.position.x - camera.Position.x) * camera.scale + xOffset;
-            float circleY = (rigidbody.transform.position.y - camera.Position.y) * camera.scale + yOffset;
-            float circleRadius = radius * camera.scale;
-
-            // Dibujar el círculo en el objeto Graphics
-            graphics.DrawEllipse(Pens.Red, circleX - circleRadius / 2, circleY - circleRadius / 2, circleRadius, circleRadius);
-        }
+        }*/
     }
 }

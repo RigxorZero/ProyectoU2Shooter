@@ -6,9 +6,6 @@ namespace CanvasDrawing.Game
 {
     class Wall : GameObject
     {
-        public bool PushDown;
-        public RectCollider rectCollider;
-
         public Wall(Image newSprite, Vector2 newSize, float xPos, float yPos) : base(newSprite, newSize, xPos, yPos)
         {
         }
@@ -21,7 +18,7 @@ namespace CanvasDrawing.Game
         public override void OnCollisionEnter(GameObject other)
         {
             base.OnCollisionEnter(other);
-            Frame f = other as Frame;
+            Frame f = other as Player;
             f?.GoBack();
         }
 

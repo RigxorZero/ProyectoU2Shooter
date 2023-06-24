@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace CanvasDrawing.UtalEngine2D_2023_1
 {
-    public static class InputManager
+    public static class InputManager //Maneja las acciones por teclado
     {
         private static List<Keys> keysDown = new List<Keys>();
         public static Dictionary<Keys, bool> keysPressed = new Dictionary<Keys, bool>();
@@ -38,6 +38,11 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
             keysPressed.Clear();
             keysUp.Clear();
             lastFrameKeyEvents.Clear();
+        }
+
+        public static bool GetKey(Keys keyCode)
+        {
+            return keysDown.Contains(keyCode) || keysPressed.ContainsKey(keyCode);
         }
 
         public static bool GetKeyDown(Keys keyCode)

@@ -1,42 +1,50 @@
 ﻿using System;
+using System.Drawing;
 
 namespace CanvasDrawing.UtalEngine2D_2023_1.Physics
 {
-    class RectCollider
+    public class RectCollider : Collider
     {
         public float Width { get; set; }
         public float Height { get; set; }
 
-        public RectCollider(float width, float height)
+        public RectCollider(Rigidbody rigidbody, float width, float height) : base(rigidbody)
         {
             Width = width;
             Height = height;
         }
 
-        public bool Intersects(RectCollider other)
+        public override void DrawCollider(Graphics graphics, Camera camera)
         {
-            // Verificar si hay intersección entre dos colliders rectangulares
-
-            // Calcular los bordes de cada collider
-            float thisLeft = -Width / 2;
-            float thisRight = Width / 2;
-            float thisTop = -Height / 2;
-            float thisBottom = Height / 2;
-
-            float otherLeft = -other.Width / 2;
-            float otherRight = other.Width / 2;
-            float otherTop = -other.Height / 2;
-            float otherBottom = other.Height / 2;
-
-            // Verificar si hay intersección en el eje X
-            bool intersectX = thisLeft <= otherRight && thisRight >= otherLeft;
-
-            // Verificar si hay intersección en el eje Y
-            bool intersectY = thisTop <= otherBottom && thisBottom >= otherTop;
-
-            // Hay intersección si hay intersección en ambos ejes
-            return intersectX && intersectY;
+            // Dibujar el collider del rectángulo
+            int x = (int)(rigidbody.transform.position.x - (Width / 2));
+            int y = (int)(rigidbody.transform.position.y - (Height / 2));
+            int w = (int)Width;
+            int h = (int)Height;
+            graphics.DrawRectangle(Pens.Red, x, y, w, h);
         }
+
+        /*public override bool CheckCollision(Collider other)
+        {
+            if (other is RectCollider otherRect)
+            {
+                Vector2 distVector = otherRect.rigidbody.transform.position - rigidbody.transform.position;
+                float deltaX = Math.Abs(distVector.x);
+                float deltaY = Math.Abs(distVector.y);
+                float intersectX = (Width + otherRect.Width) / 2 - deltaX;
+                float intersectY = (Height + otherRect.Height) / 2 - deltaY;
+
+                if (intersectX > 0 && intersectY > 0)
+                {
+                    Console.WriteLine("Fue en RectCollider");
+                    return true;
+                }
+            }
+            return false;
+        }*/
     }
 }
+
+
+
 
