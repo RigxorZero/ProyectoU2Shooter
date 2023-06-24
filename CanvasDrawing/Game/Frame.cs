@@ -34,12 +34,6 @@ namespace CanvasDrawing.Game
         }
         public override void OnCollisionEnter(GameObject other)
         {
-            FrameManager.AllFrames.Remove(this);
-            Bullet b = other as Bullet;
-            if (b != null)
-            {
-                GameEngine.Destroy(b);
-            }
         }
         public void GoBack()
         {

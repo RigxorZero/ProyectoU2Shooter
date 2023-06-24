@@ -1,4 +1,5 @@
 ﻿using CanvasDrawing.UtalEngine2D_2023_1;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -202,6 +203,20 @@ namespace CanvasDrawing.Game
                 {
                     transform.position.x += moveSpeed * Time.deltaTime;
                     moved = true;
+                }
+            }
+
+            // Verificar si se alcanzó un múltiplo de 10 en el puntaje
+            if (score % 10 == 0 && score > 0)
+            {
+                // Calcular la cantidad de vidas extra ganadas
+                int extraLives = score / 10;
+
+                // Verificar si la cantidad de vidas extra no excede la cantidad máxima de vidas
+                if (extraLives <= lifes - currentLifes)
+                {
+                    int newLives = currentLifes + extraLives;
+                    currentLifes = newLives;
                 }
             }
 

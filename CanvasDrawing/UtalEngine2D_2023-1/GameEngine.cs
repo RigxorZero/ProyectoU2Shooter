@@ -19,8 +19,14 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
         private static GameInicio gameInicio;
         private static GameOverScreen gameOverScreen;
         //Manejo spawn enemigos
-        private static float timeSinceLastNPC = 0f;
-        private const float NPCGenerationInterval = 10f; // Intervalo de generación de NPC en segundos
+        private static Random random = new Random();
+        private static float timeSinceLastMovNPC = 0f;
+        private static float timeSinceLastPerseguidorNPC = 0f;
+        private static float timeSinceLastEstaticoNPC = 0f;
+
+        private const float MovNPCGenerationInterval = 10f;
+        private const float PerseguidorNPCGenerationInterval = 15f;
+        private const float EstaticoNPCGenerationInterval = 20f;
         //Clase HUD
         public static HealthBar healthBar;
         //Creacion de personaje y enemigos
@@ -102,8 +108,11 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
                 GameObjectManager.Update();
                 PhysicsEngine.Update();
 
-                //Aumenta el tiempo de generación de npc
-                timeSinceLastNPC += Time.deltaTime;
+                // Aumenta el tiempo de generación de cada tipo de NPC
+                timeSinceLastMovNPC += Time.deltaTime;
+                timeSinceLastPerseguidorNPC += Time.deltaTime;
+                timeSinceLastEstaticoNPC += Time.deltaTime;
+
                 //Verifica si perdio el jugador
                 if (playerLost)
                 {
@@ -112,12 +121,27 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
                 }
                 //Actualiza entradas del jugador
                 InputManager.Update();
-                //Llama a generar npc y reinicia timer de generación
-                if (timeSinceLastNPC >= NPCGenerationInterval)
+                // Genera NPC de tipo EnemigoMov cada 10 segundos
+                if (timeSinceLastMovNPC >= MovNPCGenerationInterval)
                 {
-                    GenerateNPC();
-                    timeSinceLastNPC = 0f;
+                    GenerateEnemigoMov();
+                    timeSinceLastMovNPC = 0f;
                 }
+
+                // Genera NPC de tipo EnemigoPerseguidor cada 15 segundos
+                if (timeSinceLastPerseguidorNPC >= PerseguidorNPCGenerationInterval)
+                {
+                    GenerateEnemigoPerseguidor();
+                    timeSinceLastPerseguidorNPC = 0f;
+                }
+
+                // Genera NPC de tipo EnemigoEstatico cada 20 segundos
+                if (timeSinceLastEstaticoNPC >= EstaticoNPCGenerationInterval)
+                {
+                    GenerateEnemigoEstatico();
+                    timeSinceLastEstaticoNPC = 0f;
+                }
+
                 //Si no se ha perdido actualiza deadUpdate
                 if (!gameInicio.IsActive && !playerLost)
                 {
@@ -197,27 +221,41 @@ namespace CanvasDrawing.UtalEngine2D_2023_1
             //Dibuja el HUD
             healthBar.Draw(graphics);
         }
-        //Metodo para generar un npc
-        private static void GenerateNPC()
+        // Método para generar un npc
+        private static void GenerateEnemigoMov()
         {
-            Random random = new Random();
             Vector2 npcPosition = GetRandomPositionWithoutCollision();
-            Console.WriteLine("Creado en" + npcPosition.ToString());
+            Console.WriteLine("Creado EnemigoMov en" + npcPosition.ToString());
+            // Crea el EnemigoMov en la posición generada
+            new EnemigoMov(2, NPC, new Vector2(40, 48), player, npcPosition.x, npcPosition.y);
+        }
 
-            // Crea el NPC en la posición generada
+        private static void GenerateEnemigoPerseguidor()
+        {
+            Vector2 npcPosition = GetRandomPositionWithoutCollision();
+            Console.WriteLine("Creado EnemigoPerseguidor en" + npcPosition.ToString());
+            // Crea el EnemigoPerseguidor en la posición generada
             new EnemigoPerseguidor(2, NPC, new Vector2(40, 48), player, npcPosition.x, npcPosition.y);
         }
-        //Crea una posición aleatoria que no colisione con nada
+
+        private static void GenerateEnemigoEstatico()
+        {
+            Vector2 npcPosition = GetRandomPositionWithoutCollision();
+            Console.WriteLine("Creado EnemigoEstatico en" + npcPosition.ToString());
+            // Crea el EnemigoEstatico en la posición generada
+            new EnemigoEstatico(2, NPC, new Vector2(40, 48), player, npcPosition.x, npcPosition.y);
+        }
+
+        // Crea una posición aleatoria que no colisione con nada
         private static Vector2 GetRandomPositionWithoutCollision()
         {
-            Random random = new Random();
             Vector2 position;
 
             do
             {
                 // Genera una posición aleatoria dentro de los límites del mundo
-                int x = random.Next(0, 1910 * 2);
-                int y = random.Next(0, 1070 * 2);
+                int x = random.Next(0, 1900 * 2);
+                int y = random.Next(0, 1060 * 2);
                 position = new Vector2(x, y);
             }
             while (HasCollisionWithSolidSurface(position));

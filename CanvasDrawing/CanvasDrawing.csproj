@@ -55,6 +55,7 @@
     <Compile Include="Game\BackgroundElement.cs" />
     <Compile Include="Game\Bullet.cs" />
     <Compile Include="Game\EnemigoEstatico.cs" />
+    <Compile Include="Game\EnemigoMov.cs" />
     <Compile Include="Game\EnemigoPerseguidor.cs" />
     <Compile Include="Game\Frame.cs" />
     <Compile Include="Game\FrameManager.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UtalEngine2D_2023-1\GameObjectManager.cs" />
     <Compile Include="UtalEngine2D_2023-1\InputManager.cs" />
+    <Compile Include="UtalEngine2D_2023-1\MathHelper.cs" />
     <Compile Include="UtalEngine2D_2023-1\Physics\CircleCollider.cs" />
     <Compile Include="UtalEngine2D_2023-1\Physics\Collider.cs" />
     <Compile Include="UtalEngine2D_2023-1\Physics\CollisionDetector.cs" />

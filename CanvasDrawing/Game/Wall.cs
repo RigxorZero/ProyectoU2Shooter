@@ -13,7 +13,7 @@ namespace CanvasDrawing.Game
         public override void OnCollisionEnter(GameObject other)
         {
             base.OnCollisionEnter(other);
-            Frame f = other as Frame;
+            Frame f = other as Player;
             f?.GoBack();
         }
     }

@@ -6,6 +6,10 @@ Shooter desarrollado con UtalcaEngine2D_2023 con ligeras modificaciones
 
 Antonia Donoso y Hector Villalobos
 
+##Controles
+
+WASD Movimiento y flechas para disparar las balas
+
 ## Objetivos completados
 
 - [x] Su juego debe estar hecho en C#.

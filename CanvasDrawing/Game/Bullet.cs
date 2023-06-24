@@ -84,16 +84,14 @@ namespace CanvasDrawing.Game
                     }
                 }
             }
-            // Comprobar si colisiona con un NPC perseguidor
-            if (other is EnemigoPerseguidor)
+            //Comprobar si colisiona con un NPC perseguidor
+            if (other is EnemigoPerseguidor || other is EnemigoEstatico || other is EnemigoMov)
             {
-                EnemigoPerseguidor enemy = (EnemigoPerseguidor)other;
                 if (playerBullet)
                 {
                     Player.score += 1;
-                    enemy.DestroyGun();
                     GameEngine.Destroy(other);
-
+                    GameEngine.Destroy(this);
                     // Ralentizar el tiempo durante 2 segundos
                     Time.SetTimeScale(0.5f);
                     Task.Delay(TimeSpan.FromSeconds(2)).ContinueWith(_ => Time.SetTimeScale(1f));
