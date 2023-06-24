@@ -15,11 +15,6 @@ namespace CanvasDrawing.UtalEngine2D_2023_1.Physics
         //public abstract bool CheckCollision(Collider other);
 
         public abstract void DrawCollider(Graphics graphics, Camera camera);
-
-        public virtual void DrawCollider(Graphics graphics, Camera camera)
-        {
-            // Este método debe ser implementado por cada subclase de Collider
-        }
     }
 }
 

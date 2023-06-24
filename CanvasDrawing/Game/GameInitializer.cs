@@ -25,7 +25,6 @@ namespace CanvasDrawing.Game
                     {
                         Wall wall = new Wall(muro, new Vector2(50, 50), i * 50 + 25, j * 50 + 25);
                         wall.rigidbody.isStatic = true;
-                        wall.CreateRectCollider(50, 50); // Asignar un RectCollider al muro con ancho y altura de 50
                     }
                     else
                     {
