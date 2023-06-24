@@ -6,7 +6,7 @@ Shooter desarrollado con UtalcaEngine2D_2023 con ligeras modificaciones
 
 Antonia Donoso y Hector Villalobos
 
-##Controles
+## Controles
 
 WASD Movimiento y flechas para disparar las balas
 
@@ -25,9 +25,7 @@ WASD Movimiento y flechas para disparar las balas
 - [x] 1 tipo de personaje que se mueve 2 segundos hacia el jugador y luego 1.5 segundos se aleja del jugador y que dispara hacia la posición que tendría el jugador en 0.5 segundos si siguiera moviéndose derecho.
 - [X] El jugador debe tener al menos 3 puntos de vida, los enemigos pueden tener vida o morir de un golpe.
 - [X] Debe acompañar su juego con un Readme que explique los miembros del equipo, controles y lo que se logró implementar.
-- [X] Su juego debe tener un motor físico que maneja las colisiones a través de la clase Rigidbody. Los objetos visuales deben tener la 	misma posición del objeto físico.
+- [X] Su juego debe tener un motor físico que maneja las colisiones a través de la clase Rigidbody. Los objetos visuales deben tener la misma posición del objeto físico.
 - [X] Su juego debe tener un motor que maneje objetos de la clase GameObject, que tienen un Rigidbody.
 - [X] Debe tener objetos que tienen Rigidbody que detectan cuando otro objeto entra y le hace daño si es la bala del otro bando.
-
-## Por cumplir
-- [?] Debe ralentizar el tiempo cuando mata a un enemigo 2 segundos.
+- [X] Debe ralentizar el tiempo cuando mata a un enemigo 2 segundos.
